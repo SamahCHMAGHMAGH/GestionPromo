@@ -1,6 +1,6 @@
 package promo.controller;
 
-public class promoAppRunner {
+public class PromoAppRunner {
 
 	/**
 	 * Main starter or entry port
