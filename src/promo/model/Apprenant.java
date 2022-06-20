@@ -1,4 +1,4 @@
-package gestionpromo;
+package promo.model;
 
 public abstract class Apprenant {
 
