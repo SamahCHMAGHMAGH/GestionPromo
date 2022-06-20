@@ -1,5 +1,8 @@
 package promo.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class PromoAppRunner {
 
 	/**
@@ -10,5 +13,6 @@ public class PromoAppRunner {
 	public static void main(String[] args) {
 		PromoAppController app = new PromoAppController();
 		app.start();
+		 
 	}
 }
