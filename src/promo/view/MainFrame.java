@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import promo.controller.PromoAppController;
+import promo.model.PromotionList;
 
 public class MainFrame extends JFrame {
 	private JPanel mainPanel;
@@ -47,7 +48,7 @@ public class MainFrame extends JFrame {
 		promoSelection.setVisible(true);
 		promoDetail.setVisible(false);
 		promoApprenant.setVisible(false);
-	}	
+	}
 
 	public void promoDetailWindow() {
 		promoSelection.setVisible(false);
