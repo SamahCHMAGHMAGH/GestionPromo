@@ -2,6 +2,10 @@ package promo.view;
 
 import javax.swing.JPanel;
 
-public class PromoDetail extends JPanel {
+import promo.controller.PromoAppController;
 
+public class PromoDetail extends JPanel {
+	public PromoDetail(PromoAppController promoController) {
+
+	}
 }
