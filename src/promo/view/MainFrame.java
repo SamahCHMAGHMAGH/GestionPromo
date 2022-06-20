@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import promo.controller.PromoAppController;
+import promo.model.Apprenant;
 import promo.model.PromotionList;
 
 public class MainFrame extends JFrame {

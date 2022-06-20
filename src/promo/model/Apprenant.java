@@ -1,18 +1,20 @@
 package promo.model;
 
+import java.time.LocalDate;
+
 public abstract class Apprenant {
 
 	protected String nom;
 	protected String prenom;
-	protected String localDate;
+	protected LocalDate dateInscription;
 	protected String email;
 	protected String mobile;
 
-	public Apprenant(String nom, String prenom, String localDate, String email, String mobile) {
+	public Apprenant(String nom, String prenom, LocalDate dateInscription, String email, String mobile) {
 
 		this.nom = nom;
 		this.prenom = prenom;
-		this.localDate = localDate;
+		this.dateInscription = dateInscription;
 		this.email = email;
 		this.mobile = mobile;
 	}
@@ -33,12 +35,13 @@ public abstract class Apprenant {
 		this.prenom = prenom;
 	}
 
-	public String getLocalDate() {
-		return localDate;
+	
+	public LocalDate getDateInscription() {
+		return dateInscription;
 	}
 
-	public void setLocalDate(String localDate) {
-		this.localDate = localDate;
+	public void setDateInscription(LocalDate dateInscription) {
+		this.dateInscription = dateInscription;
 	}
 
 	public String getEmail() {
@@ -59,8 +62,9 @@ public abstract class Apprenant {
 
 	@Override
 	public String toString() {
-		return "Apprenant [nom=" + nom + ", prénom=" + prenom + ", localDate=" + localDate + ", email=" + email
+		return "Apprenant [nom=" + nom + ", prénom=" + prenom + ", localDate=" + dateInscription + ", email=" + email
 				+ ", mobile=" + mobile + "]";
 	}
+
 
 }

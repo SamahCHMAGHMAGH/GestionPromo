@@ -1,13 +1,17 @@
 package promo.model;
 
+import java.time.LocalDate;
+
 public class Stagiaire extends Apprenant {
 
 	protected String typeAllocation;
 	protected double montantAllocation;
 
-	public Stagiaire(String nom, String prénom, String localDate, String email, String mobile) {
-		super(nom, prénom, localDate, email, mobile);
-
+	public Stagiaire(String nom, String prenom, LocalDate dateInscription, String email, String mobile,
+			String typeAllocation, double montantAllocation) {
+		super(nom, prenom, dateInscription, email, mobile);
+		this.typeAllocation = typeAllocation;
+		this.montantAllocation = montantAllocation;
 	}
 
 	public String getTypeAllocation() {
