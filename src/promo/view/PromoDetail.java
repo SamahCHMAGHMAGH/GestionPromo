@@ -33,7 +33,7 @@ public class PromoDetail extends JPanel {
 
 		this.setBackground(Color.GRAY);
 		
-		namePromoLabel = new JLabel("Name");
+		namePromoLabel = new JLabel("Formations : ");
 		namePromoField = new JTextField(promo.getNomPromotion());
 
 		createAlternant = new JButton("New");
@@ -56,7 +56,8 @@ public class PromoDetail extends JPanel {
 					rowData[1] = promo.getApprenants().get(i).getPrenom();
 					// TODO A VOIR
 					//rowData[2] = promo.getApprenants().get(i).getDureeTotal();
-
+					
+						
 					tableModelAlternant.addRow(rowData);
 				}
 				// TODO A VOIR
