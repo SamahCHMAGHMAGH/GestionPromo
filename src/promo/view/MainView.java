@@ -47,7 +47,7 @@ public class MainView extends JFrame {
 		mainPanel.add(promoSelection);
 		mainPanel.add(promoDetail);
 		mainPanel.add(promoApprenant);
-		mainPanel.setLayout(new GridLayout(2, 1));
+		mainPanel.setLayout(new GridLayout(3, 1));
 	}
 
 	public void promoSelectionWindow() {
