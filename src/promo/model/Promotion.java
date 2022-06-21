@@ -10,11 +10,15 @@ public class Promotion {
 
 	protected String nomPromotion;
 	protected LocalDate dateDebutPromotion;
-	protected CharSequence dureeTotal;
+	protected int dureeTotal;
 	protected List<Apprenant> apprenants;
+	public List<Apprenant> getApprenants() {
+		return apprenants;
+	}
+
 	protected int delai;
 
-	public Promotion(String nomPromotion, LocalDate dateDebutPromotion, CharSequence dureeTotal,
+	public Promotion(String nomPromotion, LocalDate dateDebutPromotion, int dureeTotal,
 			List<Apprenant> apprenants) {
 		super();
 		this.nomPromotion = nomPromotion;
@@ -24,15 +28,16 @@ public class Promotion {
 	}
 
 	// Méthode pour les jours restants
-	public long joursPasses(CharSequence dureeTotal) {
+	public long joursPasses(int dureeTotal) {
 
-		// TODO A VOIR PLUS TARD
-		LocalDate dbPromo = LocalDate.parse(dureeTotal, DateTimeFormatter.ISO_LOCAL_DATE);
-		LocalDate dateDuJour = LocalDate.now(Clock.systemDefaultZone());
-		long diff = ChronoUnit.DAYS.between(dbPromo, dateDuJour);
-		System.out.println(diff);
-
-		return diff;
+// TODO A VOIR PLUS TARD
+//		LocalDate dbPromo = LocalDate.parse(dureeTotal, DateTimeFormatter.ISO_LOCAL_DATE);
+//		LocalDate dateDuJour = LocalDate.now(Clock.systemDefaultZone());
+//		long diff = ChronoUnit.DAYS.between(dbPromo, dateDuJour);
+//		System.out.println(diff);
+//
+//		return diff;
+		return 0;
 	}
 
 	// Méthode de vérification de retard
@@ -45,6 +50,12 @@ public class Promotion {
 			System.out.println("L'apprenant est en retard");
 			return "Tout va bien";
 		}
+	}
+
+	@Override
+	public String toString() {
+		return "Promotion [nomPromotion=" + nomPromotion + ", dateDebutPromotion=" + dateDebutPromotion
+				+ ", dureeTotal=" + dureeTotal + ", apprenants=" + apprenants + ", delai=" + delai + "]";
 	}
 
 }

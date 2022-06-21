@@ -7,6 +7,7 @@ import promo.model.Apprenant;
 
 public class PromoApprenant extends JPanel {
 	public PromoApprenant(PromoAppController promoController, Apprenant apprenant) {
-
+		System.out.println("PromoApprenant");
+		System.out.println(apprenant);
 	}
 }

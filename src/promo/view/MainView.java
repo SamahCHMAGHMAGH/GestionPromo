@@ -7,19 +7,24 @@ import javax.swing.JPanel;
 
 import promo.controller.PromoAppController;
 import promo.model.Apprenant;
+import promo.model.Promotion;
 import promo.model.PromotionList;
 
-public class MainFrame extends JFrame {
+public class MainView extends JFrame {
 	private JPanel mainPanel;
 	private PromoApprenant promoApprenant;
 	private PromoDetail promoDetail;
 	private PromoSelection promoSelection;
 
-	public MainFrame(PromoAppController promoController) {
-		promoSelection = new PromoSelection(promoController);
-		promoDetail = new PromoDetail(promoController);
-		promoApprenant = new PromoApprenant(promoController);
+	public MainView(PromoAppController promoController, PromotionList promoList) {
+		promoSelection = new PromoSelection(promoController, promoList);
 
+		Promotion promotion = promoList.getPromoList().get(0);
+		promoDetail = new PromoDetail(promoController, promoList.getPromoList().get(0));
+
+		Apprenant apprenant = promotion.getApprenants().get(0);
+		promoApprenant = new PromoApprenant(promoController, apprenant);
+		
 		setupPanel();
 		setupFrame();
 	}
