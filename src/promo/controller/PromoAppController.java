@@ -33,7 +33,7 @@ public class PromoAppController {
 
 		List<Promotion> promos = new ArrayList<>();
 		promos.add(p1);
-		PromotionList test = new PromotionList(promos);
+		PromotionList test = new PromotionList("ICS Formation", promos);
 
 		return test;
 	}
