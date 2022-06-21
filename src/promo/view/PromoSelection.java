@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Array;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -30,7 +31,7 @@ public class PromoSelection extends JPanel {
 	private JButton restorePromoList;
 
 	private JTable promoTable;
-	private DefaultTableModel tableModel;
+	private PromoTableModel tableModel;
 
 	public PromoSelection(PromoAppController promoController, PromotionList promoList) {
 		System.out.println("PromoSelection");
@@ -44,25 +45,8 @@ public class PromoSelection extends JPanel {
 		savePromotion = new JButton("Save");
 		deletePromotion = new JButton("Delete");
 
-		// create the JTable from a DefaultTableModel filled from the promoList sent
-		promoTable = new JTable();
-		tableModel = new DefaultTableModel();
-
-		Object[] columnsName = new Object[3];
-		columnsName[0] = "Name";
-		columnsName[1] = "Start Date";
-		columnsName[2] = "Duree";
-		tableModel.setColumnIdentifiers(columnsName);
-
-		Object[] rowData = new Object[3];
-		for (int i = 0; i < promoList.getPromoList().size(); i++) {
-			rowData[0] = promoList.getPromoList().get(i).getNomPromotion();
-			rowData[1] = promoList.getPromoList().get(i).getDateDebutPromotion();
-			rowData[2] = promoList.getPromoList().get(i).getDureeTotal();
-
-			tableModel.addRow(rowData);
-		}
-		promoTable.setModel(tableModel);
+		tableModel = new PromoTableModel(promoList.getPromoList());
+		promoTable = new JTable(tableModel);
 
 		backupPromoList = new JButton("Backup");
 		restorePromoList = new JButton("Restore");
@@ -110,7 +94,8 @@ public class PromoSelection extends JPanel {
 		gbL.gridx = 0;
 		gbL.gridy++;
 		gbL.gridwidth = 3;
-		gbL.fill = GridBagConstraints.HORIZONTAL;
+		gbL.fill = GridBagConstraints.BOTH;
+		gbL.weighty = 1;
 		this.add(new JScrollPane(promoTable), gbL);
 	}
 
@@ -150,7 +135,7 @@ public class PromoSelection extends JPanel {
 
 			}
 		});
-		
+
 		restorePromoList.addActionListener(new ActionListener() {
 
 			@Override
