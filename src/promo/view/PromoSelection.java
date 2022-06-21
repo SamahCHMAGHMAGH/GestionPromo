@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -42,7 +44,7 @@ public class PromoSelection extends JPanel {
 		savePromotion = new JButton("Save");
 		deletePromotion = new JButton("Delete");
 
-		//create the JTable from a DefaultTableModel filled from the promoList sent
+		// create the JTable from a DefaultTableModel filled from the promoList sent
 		promoTable = new JTable();
 		tableModel = new DefaultTableModel();
 
@@ -113,7 +115,49 @@ public class PromoSelection extends JPanel {
 	}
 
 	private void setupListeners() {
-		// TODO Auto-generated method stub
+		createPromotion.addActionListener(new ActionListener() {
 
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+		savePromotion.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+		deletePromotion.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+		backupPromoList.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+		
+		restorePromoList.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
 	}
 }

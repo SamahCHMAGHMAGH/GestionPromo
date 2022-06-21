@@ -66,5 +66,4 @@ public abstract class Apprenant {
 				+ ", mobile=" + mobile + "]";
 	}
 
-
 }
