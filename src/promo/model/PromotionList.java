@@ -19,6 +19,11 @@ public class PromotionList {
 
 	@Override
 	public String toString() {
-		return "PromotionList [promoList=" + promoList + "]";
+		String s = "PromoList:[";
+		for (Promotion promotion : promoList) {
+			s += "\n" + promotion;
+		}
+		s += "\n]";
+		return s;
 	}
 }

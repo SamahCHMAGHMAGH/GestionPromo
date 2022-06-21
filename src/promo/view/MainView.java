@@ -20,7 +20,7 @@ public class MainView extends JFrame {
 		promoSelection = new PromoSelection(promoController, promoList);
 
 		Promotion promotion = promoList.getPromoList().get(0);
-		promoDetail = new PromoDetail(promoController, promoList.getPromoList().get(0));
+		promoDetail = new PromoDetail(promoController, promotion);
 
 		Apprenant apprenant = promotion.getApprenants().get(0);
 		promoApprenant = new PromoApprenant(promoController, apprenant);

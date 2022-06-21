@@ -12,14 +12,14 @@ public class Promotion {
 	protected LocalDate dateDebutPromotion;
 	protected int dureeTotal;
 	protected List<Apprenant> apprenants;
+
 	public List<Apprenant> getApprenants() {
 		return apprenants;
 	}
 
 	protected int delai;
 
-	public Promotion(String nomPromotion, LocalDate dateDebutPromotion, int dureeTotal,
-			List<Apprenant> apprenants) {
+	public Promotion(String nomPromotion, LocalDate dateDebutPromotion, int dureeTotal, List<Apprenant> apprenants) {
 		super();
 		this.nomPromotion = nomPromotion;
 		this.dateDebutPromotion = dateDebutPromotion;
@@ -54,8 +54,12 @@ public class Promotion {
 
 	@Override
 	public String toString() {
-		return "Promotion [nomPromotion=" + nomPromotion + ", dateDebutPromotion=" + dateDebutPromotion
-				+ ", dureeTotal=" + dureeTotal + ", apprenants=" + apprenants + ", delai=" + delai + "]";
+		String s = "Promotion [nomPromotion=" + nomPromotion + ", dateDebutPromotion=" + dateDebutPromotion
+				+ ", dureeTotal=" + dureeTotal + ", delai=" + delai + "]";
+		for (Apprenant apprenant : apprenants) {
+			s += "\n" + apprenant;
+		}
+		return s;
 	}
 
 }
