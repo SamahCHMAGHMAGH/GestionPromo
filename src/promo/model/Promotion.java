@@ -9,8 +9,23 @@ import java.util.List;
 public class Promotion {
 
 	protected String nomPromotion;
+
+	public String getNomPromotion() {
+		return nomPromotion;
+	}
+
 	protected LocalDate dateDebutPromotion;
+
+	public LocalDate getDateDebutPromotion() {
+		return dateDebutPromotion;
+	}
+
 	protected int dureeTotal;
+
+	public int getDureeTotal() {
+		return dureeTotal;
+	}
+
 	protected List<Apprenant> apprenants;
 
 	public List<Apprenant> getApprenants() {
