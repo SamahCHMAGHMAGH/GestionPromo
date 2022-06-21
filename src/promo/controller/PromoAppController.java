@@ -28,6 +28,7 @@ public class PromoAppController {
 		List<Apprenant> apprenants = new ArrayList<>();
 		apprenants.add(s1);
 		apprenants.add(alt1);
+	
 
 		Promotion p1 = new Promotion("JAVA", LocalDate.of(2022, 05, 02), 180, apprenants);
 
@@ -37,4 +38,5 @@ public class PromoAppController {
 
 		return test;
 	}
+	
 }
