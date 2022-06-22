@@ -9,7 +9,7 @@ public abstract class Apprenant {
 	private LocalDate dateInscription;
 	private String email;
 	private String mobile;
-	private int delai;
+	private int retard;
 	private int absence;
 
 	public Apprenant(String nom, String prenom, LocalDate dateInscription, String email, String mobile) {
@@ -19,11 +19,10 @@ public abstract class Apprenant {
 		this.dateInscription = dateInscription;
 		this.email = email;
 		this.mobile = mobile;
-		this.delai = 0;
+		this.retard = 0;
 		this.absence = 0;
 	}
 
-	
 	public String getNom() {
 		return nom;
 	}
@@ -40,7 +39,6 @@ public abstract class Apprenant {
 		this.prenom = prenom;
 	}
 
-	
 	public LocalDate getDateInscription() {
 		return dateInscription;
 	}
@@ -65,12 +63,12 @@ public abstract class Apprenant {
 		this.mobile = mobile;
 	}
 
-	public int getDelai() {
-		return delai;
+	public int getRetard() {
+		return retard;
 	}
 
-	public void setDelai(int delai) {
-		this.delai = delai;
+	public void setRetard(int retard) {
+		this.retard = retard;
 	}
 
 	public int getAbsence() {
