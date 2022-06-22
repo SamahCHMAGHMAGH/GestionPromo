@@ -163,20 +163,20 @@ public class PromoDetail extends JPanel {
 			}
 		});
 
-//		alternantTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-//
-//			@Override
-//			public void valueChanged(ListSelectionEvent e) {
-//				if (!e.getValueIsAdjusting()) {
-//					ListSelectionModel lsm = (ListSelectionModel) e.getSource();
-//					int row = lsm.getMinSelectionIndex();
-//					if (!lsm.isSelectionEmpty()) {
-//						Apprenant apprenant = promo.getApprenants().get(row);
-//						promoController.changeApprenant(apprenant);
-//					}
-//				}
-//			}
-//		});
+		alternantTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				if (!e.getValueIsAdjusting()) {
+					ListSelectionModel lsm = (ListSelectionModel) e.getSource();
+					int row = lsm.getMinSelectionIndex();
+					if (!lsm.isSelectionEmpty()) {
+						Apprenant apprenant = promo.getApprenants().get(row);
+						promoController.changeApprenant(apprenant);
+					}
+				}
+			}
+		});
 
 	}
 
@@ -185,5 +185,8 @@ public class PromoDetail extends JPanel {
 		dateDebutField.setText(promo.getDateDebutPromotion().toString());
 		dureeActuelField.setText(promo.joursPasses().toString());
 		dureeTotalField.setText(Integer.toString(promo.getDureeTotal()));
+		
+		tableModelAlternant = new ApprenantTableModel(promo.getApprenants());
+		alternantTable = new JTable(tableModelAlternant);
 	}
 }

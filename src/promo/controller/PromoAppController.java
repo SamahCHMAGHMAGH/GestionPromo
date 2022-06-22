@@ -54,8 +54,8 @@ public class PromoAppController {
 		mainView.getPromoDetail().changePromotion(promo);
 	}
 
-//	public void changeApprenant(Apprenant apprenant) {
-//		mainView.getPromoApprenant().changeApprenant(apprenant);
-//	}
+	public void changeApprenant(Apprenant apprenant) {
+		mainView.getPromoApprenant().changeApprenant(apprenant);
+	}
 
 }
