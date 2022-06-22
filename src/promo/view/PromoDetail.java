@@ -24,7 +24,7 @@ public class PromoDetail extends JPanel {
 	private JButton deleteAlternant;
 	
 	private JTable alternantTable;
-	private DefaultTableModel tableModelAlternant;
+	private ApprenantTableModel tableModelAlternant;
 	
 	
 	public PromoDetail(PromoAppController promoController, Promotion promo) {
@@ -39,29 +39,9 @@ public class PromoDetail extends JPanel {
 		createAlternant = new JButton("New");
 		saveAlternant = new JButton("Save");
 		deleteAlternant = new JButton("Delete");
-		
-		//create the JTable from a DefaultTableModel filled from the promoList sent
-				alternantTable = new JTable();
-				tableModelAlternant = new DefaultTableModel();
 
-				Object[] columnsName = new Object[3];
-				columnsName[0] = "Name";
-				columnsName[1] = "First-name";
-				columnsName[2] = "Statut";
-				tableModelAlternant.setColumnIdentifiers(columnsName);
-
-				Object[] rowData = new Object[3];
-				for (int i = 0; i < promo.getApprenants().size(); i++) {
-					rowData[0] = promo.getApprenants().get(i).getNom();
-					rowData[1] = promo.getApprenants().get(i).getPrenom();
-					// TODO A VOIR
-					//rowData[2] = promo.getApprenants().get(i).getDureeTotal();
-					
-						
-					tableModelAlternant.addRow(rowData);
-				}
-				// TODO A VOIR
-			//promo.setModel(tableModelAlternant);
+				tableModelAlternant = new ApprenantTableModel(promo.getApprenants());
+				alternantTable = new JTable(tableModelAlternant);
 		
 		setupLayout();
 	}
@@ -95,13 +75,13 @@ public class PromoDetail extends JPanel {
 		gbL.gridx++;
 		this.add(deleteAlternant, gbL);
 
-		
-
 		gbL.gridx = 0;
 		gbL.gridy++;
 		gbL.gridwidth = 3;
-		gbL.fill = GridBagConstraints.HORIZONTAL;
+		gbL.fill = GridBagConstraints.BOTH;
+		gbL.weighty = 1;
 		this.add(new JScrollPane(alternantTable), gbL);
+
 	}
 	
 }

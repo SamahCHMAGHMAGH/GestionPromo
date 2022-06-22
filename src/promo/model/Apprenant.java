@@ -12,15 +12,15 @@ public abstract class Apprenant {
 	private int delai;
 	private int absence;
 
-	public Apprenant(String nom, String prenom, LocalDate dateInscription, String email, String mobile, int delai, int absence) {
+	public Apprenant(String nom, String prenom, LocalDate dateInscription, String email, String mobile) {
 
 		this.nom = nom;
 		this.prenom = prenom;
 		this.dateInscription = dateInscription;
 		this.email = email;
 		this.mobile = mobile;
-		this.delai = delai;
-		this.absence = absence;
+		this.delai = 0;
+		this.absence = 0;
 	}
 
 	
