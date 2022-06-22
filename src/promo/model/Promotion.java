@@ -33,6 +33,7 @@ public class Promotion {
 	}
 
 	protected int delai;
+	protected int absence;
 
 	public Promotion(String nomPromotion, LocalDate dateDebutPromotion, int dureeTotal, List<Apprenant> apprenants) {
 		super();
@@ -59,10 +60,20 @@ public class Promotion {
 
 	public String verifRetard() {
 		if (this.delai > 30) {
-			System.out.println("L'apprenant est en retard");
+			
 			return "L'apprenant est en retard";
 		} else {
-			System.out.println("L'apprenant est en retard");
+			
+			return "Tout va bien";
+		}
+	}
+	// Méthode de vérification d'absence
+	public String verifAbsence() {
+		if (this.absence > 0.1*dureeTotal) {
+			
+			return "L'apprenant a trop d'absence";
+		} else {
+			
 			return "Tout va bien";
 		}
 	}

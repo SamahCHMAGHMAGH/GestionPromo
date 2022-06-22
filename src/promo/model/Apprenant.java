@@ -9,6 +9,9 @@ public abstract class Apprenant {
 	protected LocalDate dateInscription;
 	protected String email;
 	protected String mobile;
+	
+	protected int delai;
+	protected int absence;
 
 	public Apprenant(String nom, String prenom, LocalDate dateInscription, String email, String mobile) {
 
@@ -19,6 +22,8 @@ public abstract class Apprenant {
 		this.mobile = mobile;
 	}
 
+
+	
 	public String getNom() {
 		return nom;
 	}
