@@ -8,10 +8,15 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import promo.controller.PromoAppController;
@@ -33,60 +38,67 @@ public class PromoDetail extends JPanel {
 	private JLabel dureeTotalLabel;
 	private JTextField dureeTotalField;
 	
-	
-	
 	private JTable alternantTable;
-	private DefaultTableModel tableModelAlternant;
+	private ApprenantTableModel tableModelAlternant;
 	private PromoAppController promoController;
+	
+	private JMenuItem saveItem, saveAllItem;
 	
 	
 	public PromoDetail(PromoAppController promoController, Promotion promo) {
 		System.out.println("PromoDetail");
 		System.out.println(promo);
 		this.promoController = promoController;
+		
 
 		this.setBackground(Color.GRAY);
+		
 		
 		namePromoLabel = new JLabel("Formations : ");
 		namePromoField = new JTextField(promo.getNomPromotion());
 		
-		dateDebutLabel = new JLabel("Debut de la formation");
+		dateDebutLabel = new JLabel("Debut de la formation : ");
 		dateDebutField = new JTextField(promo.getDateDebutPromotion().toString());
 		
-		dureeActuelLabel = new JLabel("Temps passee");
+		dureeActuelLabel = new JLabel("Temps passee : ");
 		dureeActuelField = new JTextField(promo.joursPasses().toString());
 		
-		dureeTotalLabel = new JLabel("Duree totale");
-		dureeTotalField = new JTextField(promo.getDureeTotal());
+		dureeTotalLabel = new JLabel("Duree totale : ");
+		dureeTotalField = new JTextField(Integer.toString(promo.getDureeTotal()));
 		
-	
-	
 
 		createAlternant = new JButton("New");
 		saveAlternant = new JButton("Save");
 		deleteAlternant = new JButton("Delete");
 		
+		tableModelAlternant = new ApprenantTableModel(promo.getApprenants());
+        alternantTable = new JTable(tableModelAlternant);
+        alternantTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
 		setupLayout();
 		setupListeners();
+		
 		
 	}
 	
 	private void setupLayout() {
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints gbL = new GridBagConstraints();
-		gbL.weightx = 0.1;
+		gbL.weightx = 1;
 		gbL.gridx = 0;
 		gbL.gridy = 0;
 		gbL.anchor = GridBagConstraints.LINE_END;
 		gbL.insets = new Insets(0, 0, 0, 10);
 
 		GridBagConstraints gbR = new GridBagConstraints();
-		gbR.weightx = 0.8;
+		gbR.weightx = 1;
 		gbR.gridx = 1;
 		gbR.gridy = 0;
 		gbR.gridwidth = 1;
 		gbR.fill = GridBagConstraints.HORIZONTAL;
 
+
+		
 		this.add(namePromoLabel, gbL);
 		this.add(namePromoField, gbR);
 		gbL.gridy++;
@@ -123,7 +135,8 @@ public class PromoDetail extends JPanel {
 		gbL.gridx = 0;
 		gbL.gridy++;
 		gbL.gridwidth = 3;
-		gbL.fill = GridBagConstraints.HORIZONTAL;
+		gbL.fill = GridBagConstraints.BOTH;
+		gbL.weighty = 1;
 		this.add(new JScrollPane(alternantTable), gbL);
 	}
 	

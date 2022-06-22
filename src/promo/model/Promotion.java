@@ -20,7 +20,7 @@ public class Promotion {
 		return dateDebutPromotion;
 	}
 
-	protected int dureeTotal=0;
+	protected int dureeTotal;
 
 	public int getDureeTotal() {
 		return dureeTotal;
