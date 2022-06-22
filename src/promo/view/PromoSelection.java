@@ -12,6 +12,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 import promo.controller.PromoAppController;
 import promo.model.PromotionList;
 
@@ -28,11 +31,13 @@ public class PromoSelection extends JPanel {
 
 	private JTable promoTable;
 	private PromoTableModel tableModel;
+	private PromoAppController promoController;
 
 	public PromoSelection(PromoAppController promoController, PromotionList promoList) {
 		System.out.println("PromoSelection");
 		System.out.println(promoList);
 		this.setBackground(Color.cyan);
+		this.promoController = promoController;
 
 		nameLabel = new JLabel("Name");
 		nameField = new JTextField(promoList.getName());
@@ -138,6 +143,13 @@ public class PromoSelection extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 
+			}
+		});
+
+		promoTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
 			}
 		});
 	}

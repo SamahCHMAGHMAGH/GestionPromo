@@ -29,13 +29,9 @@ public class MainView extends JFrame {
 		setupFrame();
 	}
 
-	public void selectionView() {
-
-	}
-
 	private void setupFrame() {
 		this.setContentPane(mainPanel);
-		this.setSize(500, 500);
+		this.setSize(700, 700);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("Gestion Promotions");
 //		this.pack();
