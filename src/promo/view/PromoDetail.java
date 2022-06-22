@@ -3,6 +3,9 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -22,29 +25,52 @@ public class PromoDetail extends JPanel {
 	private JButton createAlternant;
 	private JButton saveAlternant;
 	private JButton deleteAlternant;
+	private JTextField nomPromoField;
+	private JLabel dateDebutLabel;
+	private JTextField dateDebutField;
+	private JLabel dureeActuelLabel;
+	private JTextField dureeActuelField;
+	private JLabel dureeTotalLabel;
+	private JTextField dureeTotalField;
+	
+	
 	
 	private JTable alternantTable;
-	private ApprenantTableModel tableModelAlternant;
+	private DefaultTableModel tableModelAlternant;
+	private PromoAppController promoController;
 	
 	
 	public PromoDetail(PromoAppController promoController, Promotion promo) {
 		System.out.println("PromoDetail");
 		System.out.println(promo);
+		this.promoController = promoController;
 
 		this.setBackground(Color.GRAY);
 		
 		namePromoLabel = new JLabel("Formations : ");
 		namePromoField = new JTextField(promo.getNomPromotion());
+		
+		dateDebutLabel = new JLabel("Debut de la formation");
+		dateDebutField = new JTextField(promo.getDateDebutPromotion().toString());
+		
+		dureeActuelLabel = new JLabel("Temps passee");
+		dureeActuelField = new JTextField(promo.joursPasses().toString());
+		
+		dureeTotalLabel = new JLabel("Duree totale");
+		dureeTotalField = new JTextField(promo.getDureeTotal());
+		
+	
+	
 
 		createAlternant = new JButton("New");
 		saveAlternant = new JButton("Save");
 		deleteAlternant = new JButton("Delete");
-
-				tableModelAlternant = new ApprenantTableModel(promo.getApprenants());
-				alternantTable = new JTable(tableModelAlternant);
 		
 		setupLayout();
+		setupListeners();
+		
 	}
+	
 	private void setupLayout() {
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints gbL = new GridBagConstraints();
@@ -63,6 +89,23 @@ public class PromoDetail extends JPanel {
 
 		this.add(namePromoLabel, gbL);
 		this.add(namePromoField, gbR);
+		gbL.gridy++;
+		gbR.gridy++;
+		
+		this.add(dateDebutLabel, gbL);
+		this.add(dateDebutField, gbR);
+		gbL.gridy++;
+		gbR.gridy++;
+		
+		this.add(dureeActuelLabel, gbL);
+		this.add(dureeActuelField, gbR);
+		gbL.gridy++;
+		gbR.gridy++;
+		
+		this.add(dureeTotalLabel, gbL);
+		this.add(dureeTotalField, gbR);
+		gbL.gridy++;
+		gbR.gridy++;
 
 		gbL.anchor = GridBagConstraints.LINE_START;
 		gbL.weightx = 0.5;
@@ -75,13 +118,40 @@ public class PromoDetail extends JPanel {
 		gbL.gridx++;
 		this.add(deleteAlternant, gbL);
 
+		
+
 		gbL.gridx = 0;
 		gbL.gridy++;
 		gbL.gridwidth = 3;
-		gbL.fill = GridBagConstraints.BOTH;
-		gbL.weighty = 1;
+		gbL.fill = GridBagConstraints.HORIZONTAL;
 		this.add(new JScrollPane(alternantTable), gbL);
-
 	}
 	
+	private void setupListeners() {
+		createAlternant.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+		saveAlternant.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+		deleteAlternant.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+	}
 }

@@ -20,7 +20,7 @@ public class Promotion {
 		return dateDebutPromotion;
 	}
 
-	protected int dureeTotal;
+	protected int dureeTotal=0;
 
 	public int getDureeTotal() {
 		return dureeTotal;
@@ -43,17 +43,23 @@ public class Promotion {
 		this.apprenants = apprenants;
 	}
 
-	// Méthode pour les jours restants
-	public long joursPasses(int dureeTotal) {
+	public void setDateDebutPromotion(LocalDate dateDebutPromotion) {
+		this.dateDebutPromotion = dateDebutPromotion;
+	}
 
-// TODO A VOIR PLUS TARD
-//		LocalDate dbPromo = LocalDate.parse(dureeTotal, DateTimeFormatter.ISO_LOCAL_DATE);
-//		LocalDate dateDuJour = LocalDate.now(Clock.systemDefaultZone());
-//		long diff = ChronoUnit.DAYS.between(dbPromo, dateDuJour);
-//		System.out.println(diff);
-//
-//		return diff;
-		return 0;
+	public void setDureeTotal(int dureeTotal) {
+		this.dureeTotal = dureeTotal;
+	}
+
+	// Méthode pour les jours restants
+	public Long joursPasses() {
+		
+		LocalDate dateDuJour = LocalDate.now(Clock.systemDefaultZone());
+		
+		Long diff = ChronoUnit.DAYS.between(dateDebutPromotion, dateDuJour);
+		
+		return diff;
+		
 	}
 
 	// Méthode de vérification de retard

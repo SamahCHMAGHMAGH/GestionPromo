@@ -56,7 +56,7 @@ public class ApprenantTableModel extends AbstractTableModel {
 				case PRENOMAPPRENANT:
 					return  a.getPrenom();
 					// TODO A VOIR
-//				case DUREETOTAL:
+				case STATUTAPPRENANT:
 //					return a.getDureeTotal();
 				}
 			}
