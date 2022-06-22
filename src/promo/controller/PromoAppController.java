@@ -52,7 +52,10 @@ public class PromoAppController {
 
 	public void changePromotion(Promotion promo) {
 		mainView.getPromoDetail().changePromotion(promo);
+	}
 
+	public void changeApprenant(Apprenant apprenant) {
+		mainView.getPromoApprenant().changeApprenant(apprenant);
 	}
 
 }

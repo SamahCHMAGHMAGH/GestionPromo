@@ -18,9 +18,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import promo.controller.PromoAppController;
+import promo.model.Apprenant;
 import promo.model.Promotion;
 
 public class PromoDetail extends JPanel {
@@ -159,6 +162,22 @@ public class PromoDetail extends JPanel {
 
 			}
 		});
+
+		alternantTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				if (!e.getValueIsAdjusting()) {
+					ListSelectionModel lsm = (ListSelectionModel) e.getSource();
+					int row = lsm.getMinSelectionIndex();
+					if (!lsm.isSelectionEmpty()) {
+						Apprenant apprenant = promo.getApprenants().get(row);
+						promoController.changeApprenant(apprenant);
+					}
+				}
+			}
+		});
+
 	}
 
 	public void changePromotion(Promotion promo) {
