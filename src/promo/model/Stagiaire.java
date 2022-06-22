@@ -22,7 +22,7 @@ public class Stagiaire extends Apprenant {
 		this.typeAllocation = typeAllocation;
 	}
 
-	public double getMontantAllocation() {
+	public Double getMontantAllocation() {
 		return montantAllocation;
 	}
 

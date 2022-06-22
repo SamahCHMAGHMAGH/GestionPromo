@@ -13,13 +13,17 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import promo.controller.PromoAppController;
+import promo.model.Alternant;
 import promo.model.Apprenant;
+import promo.model.Stagiaire;
 
 public class PromoApprenant extends JPanel {
 
-	//on a défini les attributs par la classe "JLabel" qui permet d'afficher une chaîne courte
-	//et par la classe "JTextField" qui permet de modifier une seule ligne de texte   
-	//on a rajouté a la fin deux attributs de type classe pour sauvgarder et annuler 
+	// on a défini les attributs par la classe "JLabel" qui permet d'afficher une
+	// chaîne courte
+	// et par la classe "JTextField" qui permet de modifier une seule ligne de texte
+	// on a rajouté a la fin deux attributs de type classe pour sauvgarder et
+	// annuler
 	private JLabel nomLabel;
 	private JLabel prenomLabel;
 	private JLabel dateInscriptionLabel;
@@ -36,17 +40,23 @@ public class PromoApprenant extends JPanel {
 	private JTextField absenceField;
 	private JButton saveApprenant;
 	private JButton cancelApprenant;
-
 	private PromoAppController promoController;
+	private JLabel nomEntrepriseLabel;
+	private JTextField nomEntrepriseField;
+	private JLabel typeAllocationLabel;
+	private JTextField typeAllocationField;
+	private JLabel montantAllocationStagiaireLabel;
+	private JTextField montantAllocationField;
+	private JLabel montantSalaireApprenantLabel;
+	private JTextField montantSalaireField;
 
 	public PromoApprenant(PromoAppController promoController, Apprenant apprenant) {
 		System.out.println("PromoApprenant");
 		System.out.println(apprenant);
 
-		
 //		this.setBackground(Color.LIGHT_GRAY);
 		this.promoController = promoController;
-		
+
 		nomLabel = new JLabel("Nom");
 		nomField = new JTextField(apprenant.getNom());
 
@@ -71,6 +81,34 @@ public class PromoApprenant extends JPanel {
 		saveApprenant = new JButton("Save");
 		cancelApprenant = new JButton("Cancel");
 
+		if (apprenant instanceof Stagiaire) {
+			nomEntrepriseLabel = new JLabel("Nom d'entreprise");
+			nomEntrepriseField = new JTextField("N/A");
+
+			typeAllocationLabel = new JLabel("rémunération");
+			typeAllocationField = new JTextField(((Stagiaire) apprenant).getTypeAllocation());
+
+			montantAllocationStagiaireLabel = new JLabel("allocation");
+			montantAllocationField = new JTextField(((Stagiaire) apprenant).getMontantAllocation().toString());
+
+			montantSalaireApprenantLabel = new JLabel("salaire");
+			montantSalaireField = new JTextField("n/a");
+
+		}
+		if (apprenant instanceof Alternant) {
+			nomEntrepriseLabel = new JLabel("nom");
+			nomEntrepriseField = new JTextField("N/A");
+
+			typeAllocationLabel = new JLabel("salaire");
+			typeAllocationField = new JTextField(((Alternant) apprenant).getNomEntreprise());
+
+			montantAllocationStagiaireLabel = new JLabel("allocation");
+			montantAllocationField = new JTextField("n/a");
+
+			montantSalaireApprenantLabel = new JLabel("salaire");
+			montantSalaireField = new JTextField(((Alternant) apprenant).getSalaire().toString());
+		}
+
 		SetUpLayout();
 
 	}
@@ -91,6 +129,11 @@ public class PromoApprenant extends JPanel {
 		gbR.gridwidth = 1;
 		gbR.fill = GridBagConstraints.HORIZONTAL;
 
+		this.add(nomEntrepriseLabel, gbL);
+		this.add(nomEntrepriseField, gbR);
+		gbL.gridy++;
+		gbR.gridy++;
+		
 		this.add(nomLabel, gbL);
 		this.add(nomField, gbR);
 		gbL.gridy++;
@@ -121,6 +164,16 @@ public class PromoApprenant extends JPanel {
 		gbL.gridy++;
 		gbR.gridy++;
 
+		this.add(montantAllocationStagiaireLabel, gbL);
+		this.add(montantAllocationField, gbR);
+		gbL.gridy++;
+		gbR.gridy++;
+
+		this.add(montantSalaireApprenantLabel, gbL);
+		this.add(montantSalaireField, gbR);
+		gbL.gridy++;
+		gbR.gridy++;
+
 		this.add(absenceLabel, gbL);
 		this.add(absenceField, gbR);
 		gbL.gridy++;
@@ -130,5 +183,6 @@ public class PromoApprenant extends JPanel {
 		this.add(cancelApprenant, gbR);
 		gbL.gridy++;
 		gbR.gridy++;
+
 	}
 }

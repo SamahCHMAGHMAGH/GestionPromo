@@ -22,7 +22,7 @@ public class Alternant extends Apprenant {
 		this.nomEntreprise = nomEntreprise;
 	}
 
-	public double getSalaire() {
+	public Double getSalaire() {
 		return salaire;
 	}
 
