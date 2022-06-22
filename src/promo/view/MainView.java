@@ -16,6 +16,30 @@ public class MainView extends JFrame {
 	private PromoDetail promoDetail;
 	private PromoSelection promoSelection;
 
+	public PromoApprenant getPromoApprenant() {
+		return promoApprenant;
+	}
+
+	public void setPromoApprenant(PromoApprenant promoApprenant) {
+		this.promoApprenant = promoApprenant;
+	}
+
+	public PromoDetail getPromoDetail() {
+		return promoDetail;
+	}
+
+	public void setPromoDetail(PromoDetail promoDetail) {
+		this.promoDetail = promoDetail;
+	}
+
+	public PromoSelection getPromoSelection() {
+		return promoSelection;
+	}
+
+	public void setPromoSelection(PromoSelection promoSelection) {
+		this.promoSelection = promoSelection;
+	}
+
 	public MainView(PromoAppController promoController, PromotionList promoList) {
 		promoSelection = new PromoSelection(promoController, promoList);
 

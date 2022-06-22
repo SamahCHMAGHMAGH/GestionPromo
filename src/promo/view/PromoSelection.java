@@ -12,10 +12,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import promo.controller.PromoAppController;
+import promo.model.Promotion;
 import promo.model.PromotionList;
 
 public class PromoSelection extends JPanel {
@@ -29,15 +31,17 @@ public class PromoSelection extends JPanel {
 	private JButton backupPromoList;
 	private JButton restorePromoList;
 
-	private JTable promoTable;
+	private JTable promoJTable;
 	private PromoTableModel tableModel;
 	private PromoAppController promoController;
+	private PromotionList promoList;
 
 	public PromoSelection(PromoAppController promoController, PromotionList promoList) {
 		System.out.println("PromoSelection");
 		System.out.println(promoList);
 		this.setBackground(Color.cyan);
 		this.promoController = promoController;
+		this.promoList = promoList;
 
 		nameLabel = new JLabel("Name");
 		nameField = new JTextField(promoList.getName());
@@ -47,7 +51,7 @@ public class PromoSelection extends JPanel {
 		deletePromotion = new JButton("Delete");
 
 		tableModel = new PromoTableModel(promoList.getPromoList());
-		promoTable = new JTable(tableModel);
+		promoJTable = new JTable(tableModel);
 
 		backupPromoList = new JButton("Backup");
 		restorePromoList = new JButton("Restore");
@@ -97,7 +101,7 @@ public class PromoSelection extends JPanel {
 		gbL.gridwidth = 3;
 		gbL.fill = GridBagConstraints.BOTH;
 		gbL.weighty = 1;
-		this.add(new JScrollPane(promoTable), gbL);
+		this.add(new JScrollPane(promoJTable), gbL);
 	}
 
 	private void setupListeners() {
@@ -146,10 +150,18 @@ public class PromoSelection extends JPanel {
 			}
 		});
 
-		promoTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+		promoJTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
+				if (!e.getValueIsAdjusting()) {
+					ListSelectionModel lsm = (ListSelectionModel) e.getSource();
+					int row = lsm.getMinSelectionIndex();
+					if (!lsm.isSelectionEmpty()) {
+						Promotion promo = promoList.getPromoList().get(row);
+						promoController.changePromotion(promo);
+					}
+				}
 			}
 		});
 	}

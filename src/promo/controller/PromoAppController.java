@@ -26,10 +26,11 @@ public class PromoAppController {
 				"IBM", 2000);
 		Stagiaire s2 = new Stagiaire("blanc", "laurent", LocalDate.of(2022, 03, 05), "laurent@blanc", "0677é77",
 				"pole emploi", 1000);
-		Alternant alt2 = new Alternant("paul", "pogba", LocalDate.of(2022, 03, 10), "paul@pogba", "066666", "IBM", 2000);
+		Alternant alt2 = new Alternant("paul", "pogba", LocalDate.of(2022, 03, 10), "paul@pogba", "066666", "IBM",
+				2000);
 		Stagiaire s3 = new Stagiaire("romain", "perraud", LocalDate.of(2022, 02, 03), "romain@perraud", "0677é77",
 				"pole emploi", 1000);
-	
+
 		List<Apprenant> apprenants1 = new ArrayList<>();
 		apprenants1.add(s1);
 		apprenants1.add(alt1);
@@ -49,6 +50,9 @@ public class PromoAppController {
 		return test;
 	}
 
-	
+	public void changePromotion(Promotion promo) {
+		mainView.getPromoDetail().changePromotion(promo);
+
+	}
 
 }
