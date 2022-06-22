@@ -4,24 +4,24 @@ import java.time.LocalDate;
 
 public abstract class Apprenant {
 
-	protected String nom;
-	protected String prenom;
-	protected LocalDate dateInscription;
-	protected String email;
-	protected String mobile;
-	
-	protected int delai;
-	protected int absence;
+	private String nom;
+	private String prenom;
+	private LocalDate dateInscription;
+	private String email;
+	private String mobile;
+	private int delai;
+	private int absence;
 
-	public Apprenant(String nom, String prenom, LocalDate dateInscription, String email, String mobile) {
+	public Apprenant(String nom, String prenom, LocalDate dateInscription, String email, String mobile, int delai, int absence) {
 
 		this.nom = nom;
 		this.prenom = prenom;
 		this.dateInscription = dateInscription;
 		this.email = email;
 		this.mobile = mobile;
+		this.delai = delai;
+		this.absence = absence;
 	}
-
 
 	
 	public String getNom() {
@@ -63,6 +63,22 @@ public abstract class Apprenant {
 
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
+	}
+
+	public int getDelai() {
+		return delai;
+	}
+
+	public void setDelai(int delai) {
+		this.delai = delai;
+	}
+
+	public int getAbsence() {
+		return absence;
+	}
+
+	public void setAbsence(int absence) {
+		this.absence = absence;
 	}
 
 	@Override
