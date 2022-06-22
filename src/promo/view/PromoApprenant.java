@@ -31,7 +31,7 @@ public class PromoApprenant extends JPanel {
 	private JTextField prenomField;
 	private JTextField dateInscriptionField;
 	private JTextField emailField;
-	private Component mobileField;
+	private JTextField mobileField;
 	private JTextField retardField;
 	private JTextField absenceField;
 	private JButton saveApprenant;
@@ -130,6 +130,5 @@ public class PromoApprenant extends JPanel {
 		this.add(cancelApprenant, gbR);
 		gbL.gridy++;
 		gbR.gridy++;
-
 	}
 }
