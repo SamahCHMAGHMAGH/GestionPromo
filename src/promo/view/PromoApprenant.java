@@ -81,7 +81,7 @@ public class PromoApprenant extends JPanel {
 		// All fields will be disabled until after the type of Apprenant is selected
 		nomLabel = new JLabel("Nom");
 		nomField = new JTextField("");
-
+	
 		prenomLabel = new JLabel("Prénom");
 		prenomField = new JTextField("");
 
@@ -106,10 +106,10 @@ public class PromoApprenant extends JPanel {
 		nomEntrepriseLabel = new JLabel("Nom d'entreprise");
 		nomEntrepriseField = new JTextField("");
 
-		typeAllocationLabel = new JLabel("rémunération");
+		typeAllocationLabel = new JLabel("type d'allocation");
 		typeAllocationField = new JTextField("");
 
-		montantAllocationStagiaireLabel = new JLabel("allocation");
+		montantAllocationStagiaireLabel = new JLabel("montant allocation");
 		montantAllocationField = new JTextField("");
 
 		montantSalaireApprenantLabel = new JLabel("salaire");
@@ -117,7 +117,6 @@ public class PromoApprenant extends JPanel {
 
 		SetUpLayout();
 		setupListeners();
-		setEnabled();
 	}
 
 	public PromoApprenant(PromoAppController promoController, Promotion promo, Apprenant apprenant) {
@@ -136,10 +135,10 @@ public class PromoApprenant extends JPanel {
 
 		if (apprenant instanceof Stagiaire) {
 			stagiaire = (Stagiaire) apprenant;
-			combobox.setSelectedIndex(0);
+			// TODO Set combobox to Stagiaire
 		} else {
 			alternant = (Alternant) apprenant;
-			combobox.setSelectedIndex(1);
+			// TODO Set combobox to Alternant
 		}
 
 		nomLabel = new JLabel("Nom");
@@ -186,12 +185,12 @@ public class PromoApprenant extends JPanel {
 			nomEntrepriseLabel.setFont(new Font("Arial", Font.BOLD, 15));
 			nomEntrepriseField.setBackground(Color.getHSBColor(200, 100, 50));
 
-			typeAllocationLabel = new JLabel("rémunération");
+			typeAllocationLabel = new JLabel("type d'allocation");
 			typeAllocationField = new JTextField(((Stagiaire) apprenant).getTypeAllocation());
 			typeAllocationLabel.setFont(new Font("Arial", Font.BOLD, 15));
 			typeAllocationField.setBackground(Color.getHSBColor(200, 100, 50));
 
-			montantAllocationStagiaireLabel = new JLabel("allocation");
+			montantAllocationStagiaireLabel = new JLabel("montant allocation");
 			montantAllocationField = new JTextField(((Stagiaire) apprenant).getMontantAllocation().toString());
 			montantAllocationStagiaireLabel.setFont(new Font("Arial", Font.BOLD, 15));
 			montantAllocationField.setBackground(Color.getHSBColor(200, 100, 50));
@@ -209,10 +208,10 @@ public class PromoApprenant extends JPanel {
 			montantSalaireApprenantLabel = new JLabel("salaire");
 			montantSalaireField = new JTextField(((Alternant) apprenant).getSalaire().toString());
 
-			typeAllocationLabel = new JLabel("salaire");
+			typeAllocationLabel = new JLabel("type d'allocation");
 			typeAllocationField = new JTextField("n/a");
 
-			montantAllocationStagiaireLabel = new JLabel("allocation");
+			montantAllocationStagiaireLabel = new JLabel("montant allocation");
 			montantAllocationField = new JTextField("n/a");
 		}
 
@@ -228,30 +227,6 @@ public class PromoApprenant extends JPanel {
 				promoController.cancelApprenantClicked(promo);
 			}
 		});
-
-		combobox.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setEnabled();
-			}
-		});
-	}
-
-	public void setEnabled() {
-		if (combobox.getSelectedItem().toString() == "Stagiaire") {
-			nomEntrepriseField.setEnabled(false);
-			montantSalaireField.setEnabled(false);
-
-			typeAllocationField.setEnabled(true);
-			montantAllocationField.setEnabled(true);
-		} else {
-			nomEntrepriseField.setEnabled(true);
-			montantSalaireField.setEnabled(true);
-
-			typeAllocationField.setEnabled(true);
-			montantAllocationField.setEnabled(false);
-		}
 	}
 
 	private void SetUpLayout() {
@@ -307,6 +282,11 @@ public class PromoApprenant extends JPanel {
 
 		this.add(retardLabel, gbL);
 		this.add(retardField, gbR);
+		gbL.gridy++;
+		gbR.gridy++;
+
+		this.add(typeAllocationLabel, gbL);
+		this.add(typeAllocationField, gbR);
 		gbL.gridy++;
 		gbR.gridy++;
 
