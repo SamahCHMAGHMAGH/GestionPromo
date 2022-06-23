@@ -25,6 +25,7 @@ public class PromoSelection extends JPanel {
 	private JTextField nameField;
 	private JLabel nameLabel;
 
+	private JButton updateName;
 	private JButton createPromotion;
 	private JButton savePromotion;
 	private JButton deletePromotion;
@@ -36,6 +37,15 @@ public class PromoSelection extends JPanel {
 	private PromoTableModel tableModel;
 	private PromoAppController promoController;
 	private PromotionList promoList;
+	private Promotion selectedPromotion;
+
+	public Promotion getSelectedPromotion() {
+		return selectedPromotion;
+	}
+
+	public void setSelectedPromotion(Promotion selectedPromotion) {
+		this.selectedPromotion = selectedPromotion;
+	}
 
 	public PromoSelection(PromoAppController promoController, PromotionList promoList) {
 		System.out.println("PromoSelection");
@@ -46,18 +56,23 @@ public class PromoSelection extends JPanel {
 
 		nameLabel = new JLabel("Name : ");
 		nameField = new JTextField(promoList.getName());
+
 		nameLabel.setFont(new Font("Arial", Font.BOLD, 15));
 
-		createPromotion = new JButton("New");
-		savePromotion = new JButton("Save");
-		deletePromotion = new JButton("Delete");
+		updateName = new JButton("Update Name");
+
+		createPromotion = new JButton("New Promo");
+		savePromotion = new JButton("Update Promo");
+		savePromotion.setEnabled(false);
+		deletePromotion = new JButton("Delete Promo");
+		deletePromotion.setEnabled(false);
 
 		tableModel = new PromoTableModel(promoList.getPromoList());
 		promoJTable = new JTable(tableModel);
 		promoJTable.setBackground(Color.getHSBColor(200, 100, 50));
 
-		backupPromoList = new JButton("Backup");
-		restorePromoList = new JButton("Restore");
+		backupPromoList = new JButton("Backup Database");
+		restorePromoList = new JButton("Restore Database");
 
 		setupLayout();
 		setupListeners();
@@ -82,6 +97,23 @@ public class PromoSelection extends JPanel {
 		this.add(nameLabel, gbL);
 		this.add(nameField, gbR);
 
+		gbL.gridy++;
+		gbR.gridy++;
+		gbR.gridx = 1;
+		this.add(updateName, gbR);
+
+		gbL.gridx = 0;
+		gbL.gridy++;
+		gbL.gridwidth = 3;
+		gbL.fill = GridBagConstraints.BOTH;
+		gbL.weighty = 1;
+		this.add(new JScrollPane(promoJTable), gbL);
+		
+
+		gbL.gridy++;
+		gbL.weighty = 0;
+		gbL.gridwidth = 1;
+		gbL.fill = GridBagConstraints.NONE;
 		gbL.anchor = GridBagConstraints.LINE_START;
 		gbL.weightx = 0.5;
 
@@ -93,22 +125,13 @@ public class PromoSelection extends JPanel {
 		gbL.gridx++;
 		this.add(deletePromotion, gbL);
 
-		
-
-		gbL.gridx = 0;
-		gbL.gridy++;
-		gbL.gridwidth = 3;
-		gbL.fill = GridBagConstraints.BOTH;
-		gbL.weighty = 1;
-		this.add(new JScrollPane(promoJTable), gbL);
-		
-		gbL.fill = GridBagConstraints.NONE;
 		gbL.gridx = 0;
 		gbL.gridy++;
 		this.add(backupPromoList, gbL);
-		gbL.gridx = 1;
+		gbL.gridx += 2;
 		this.add(restorePromoList, gbL);
-		
+
+
 		
 	}
 
@@ -117,8 +140,7 @@ public class PromoSelection extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-
+				promoController.newPromotionClicked();
 			}
 		});
 
@@ -126,8 +148,7 @@ public class PromoSelection extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-
+				promoController.updatePromotionClicked(selectedPromotion);
 			}
 		});
 
@@ -135,8 +156,7 @@ public class PromoSelection extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-
+				promoController.deletePromotionClicked(selectedPromotion);
 			}
 		});
 
@@ -163,11 +183,14 @@ public class PromoSelection extends JPanel {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				if (!e.getValueIsAdjusting()) {
+					deletePromotion.setEnabled(true);
+					savePromotion.setEnabled(true);
+
 					ListSelectionModel lsm = (ListSelectionModel) e.getSource();
 					int row = lsm.getMinSelectionIndex();
 					if (!lsm.isSelectionEmpty()) {
 						Promotion promo = promoList.getPromoList().get(row);
-						promoController.changePromotion(promo);
+						selectedPromotion = promo;
 					}
 				}
 			}

@@ -36,4 +36,8 @@ public class PromotionList {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public void addPromotion(Promotion promo) {
+		promoList.add(promo);		
+	}
 }

@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.time.LocalDate;
 
 import javax.swing.JButton;
@@ -17,6 +19,7 @@ import javax.swing.JTextField;
 import promo.controller.PromoAppController;
 import promo.model.Alternant;
 import promo.model.Apprenant;
+import promo.model.Promotion;
 import promo.model.Stagiaire;
 
 public class PromoApprenant extends JPanel {
@@ -42,7 +45,6 @@ public class PromoApprenant extends JPanel {
 	private JTextField absenceField;
 	private JButton saveApprenant;
 	private JButton cancelApprenant;
-	private PromoAppController promoController;
 	private JLabel nomEntrepriseLabel;
 	private JTextField nomEntrepriseField;
 	private JLabel typeAllocationLabel;
@@ -53,23 +55,98 @@ public class PromoApprenant extends JPanel {
 	private JTextField montantSalaireField;
 	private JLabel comboboxLabel;
 	private JComboBox combobox;
+	private Stagiaire stagiaire;
+	private Alternant alternant;
 
-	public PromoApprenant(PromoAppController promoController, Apprenant apprenant) {
+	private PromoAppController promoController;
+	private Promotion promo;
+	private Apprenant apprenant;
+
+	/**
+	 * Constructor for a new apprenant, will as to select the Apprentant type via a
+	 * comboBox. Then will create the fields appropriately.
+	 * 
+	 * @param promoController
+	 */
+	public PromoApprenant(PromoAppController promoController, Promotion promo) {
+		System.out.println("New Apprenant");
+		this.promoController = promoController;
+		this.promo = promo;
+		// Insert Comobo box here
+
+		String S1[] = { "Stagiaire", "Alternant" };
+		comboboxLabel = new JLabel("Apprenant Type");
+		combobox = new JComboBox(S1);
+
+		// All fields will be disabled until after the type of Apprenant is selected
+		nomLabel = new JLabel("Nom");
+		nomField = new JTextField("");
+		nomField.setEnabled(false);// Set enabled false for all fields
+
+		prenomLabel = new JLabel("Prénom");
+		prenomField = new JTextField("");
+
+		dateInscriptionLabel = new JLabel("Date d'inscription");
+		dateInscriptionField = new JTextField("");
+
+		emailLabel = new JLabel("émail");
+		emailField = new JTextField("");
+
+		mobileLabel = new JLabel("mobile");
+		mobileField = new JTextField("");
+
+		retardLabel = new JLabel("retard");
+		retardField = new JTextField("0");
+
+		absenceLabel = new JLabel("absence");
+		absenceField = new JTextField("0");
+
+		saveApprenant = new JButton("Save");
+		cancelApprenant = new JButton("Cancel");
+
+		nomEntrepriseLabel = new JLabel("Nom d'entreprise");
+		nomEntrepriseField = new JTextField("");
+
+		typeAllocationLabel = new JLabel("rémunération");
+		typeAllocationField = new JTextField("");
+
+		montantAllocationStagiaireLabel = new JLabel("allocation");
+		montantAllocationField = new JTextField("");
+
+		montantSalaireApprenantLabel = new JLabel("salaire");
+		montantSalaireField = new JTextField("");
+
+		SetUpLayout();
+		setupListeners();
+	}
+
+	public PromoApprenant(PromoAppController promoController, Promotion promo, Apprenant apprenant) {
 		System.out.println("PromoApprenant");
 		System.out.println(apprenant);
 
 		this.setBackground(Color.cyan);
 		this.promoController = promoController;
+		this.promo = promo;
+		this.apprenant = apprenant;
 
-		String S1[] = {"Stagiaire", "Alternant"};
+		String S1[] = { "Stagiaire", "Alternant" };
 		comboboxLabel = new JLabel("Apprenant Type");
 		combobox = new JComboBox(S1);
-		
+		combobox.setEnabled(false);
+
+		if (apprenant instanceof Stagiaire) {
+			stagiaire = (Stagiaire) apprenant;
+			// TODO Set combobox to Stagiaire
+		} else {
+			alternant = (Alternant) apprenant;
+			// TODO Set combobox to Alternant
+		}
+
 		nomLabel = new JLabel("Nom");
 		nomField = new JTextField(apprenant.getNom());
 		nomLabel.setFont(new Font("Arial", Font.BOLD, 15));
 		nomField.setBackground(Color.getHSBColor(200, 100, 50));
-		
+
 		prenomLabel = new JLabel("Prénom");
 		prenomField = new JTextField(apprenant.getPrenom());
 		prenomLabel.setFont(new Font("Arial", Font.BOLD, 15));
@@ -79,7 +156,7 @@ public class PromoApprenant extends JPanel {
 		dateInscriptionField = new JTextField(apprenant.getDateInscription().toString());
 		dateInscriptionLabel.setFont(new Font("Arial", Font.BOLD, 15));
 		dateInscriptionField.setBackground(Color.getHSBColor(200, 100, 50));
-		
+
 		emailLabel = new JLabel("Email");
 		emailField = new JTextField(apprenant.getEmail());
 		emailLabel.setFont(new Font("Arial", Font.BOLD, 15));
@@ -89,7 +166,6 @@ public class PromoApprenant extends JPanel {
 		mobileField = new JTextField(apprenant.getMobile());
 		mobileLabel.setFont(new Font("Arial", Font.BOLD, 15));
 		mobileField.setBackground(Color.getHSBColor(200, 100, 50));
-		
 
 		retardLabel = new JLabel("Retard");
 		retardField = new JTextField(Integer.toString(apprenant.getRetard()));
@@ -141,7 +217,17 @@ public class PromoApprenant extends JPanel {
 		}
 
 		SetUpLayout();
+		setupListeners();
+	}
 
+	private void setupListeners() {
+		cancelApprenant.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				promoController.cancelApprenantClicked(promo);
+			}
+		});
 	}
 
 	private void SetUpLayout() {
@@ -159,12 +245,12 @@ public class PromoApprenant extends JPanel {
 		gbR.gridy = 0;
 		gbR.gridwidth = 1;
 		gbR.fill = GridBagConstraints.HORIZONTAL;
-	
+
 		this.add(comboboxLabel, gbL);
 		this.add(combobox, gbR);
 		gbL.gridy++;
 		gbR.gridy++;
-	
+
 		this.add(nomEntrepriseLabel, gbL);
 		this.add(nomEntrepriseField, gbR);
 		gbL.gridy++;
@@ -221,29 +307,4 @@ public class PromoApprenant extends JPanel {
 		gbR.gridy++;
 
 	}
-
-	public void changeApprenant(Apprenant apprenant) {
-		nomField.setText(apprenant.getNom());
-		prenomField.setText(apprenant.getPrenom());
-		dateInscriptionField.setText(apprenant.getDateInscription().toString());
-		emailField.setText(apprenant.getEmail());
-		mobileField.setText(apprenant.getMobile());
-		retardField.setText(Integer.toString(apprenant.getRetard()));
-		absenceField.setText(Integer.toString(apprenant.getRetard()));
-		
-		if (apprenant instanceof Stagiaire) {
-			nomEntrepriseField.setText("N/A");
-			typeAllocationField.setText(((Stagiaire) apprenant).getTypeAllocation());
-			montantAllocationField.setText(((Stagiaire) apprenant).getMontantAllocation().toString());
-			montantSalaireField.setText("n/a");
-		}
-
-		if (apprenant instanceof Alternant) {
-			nomEntrepriseField.setText(((Alternant) apprenant).getNomEntreprise());
-			montantSalaireField.setText(((Alternant) apprenant).getSalaire().toString());
-			typeAllocationField.setText("n/a");
-			montantAllocationField.setText("n/a");
-		}
-	}
-
 }

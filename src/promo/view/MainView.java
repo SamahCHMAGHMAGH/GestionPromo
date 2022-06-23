@@ -1,5 +1,6 @@
 package promo.view;
 
+import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -13,10 +14,21 @@ import promo.model.Promotion;
 import promo.model.PromotionList;
 
 public class MainView extends JFrame {
-	private JPanel mainPanel;
 	private PromoApprenant promoApprenant;
 	private PromoDetail promoDetail;
 	private PromoSelection promoSelection;
+
+	private PromoAppController promoController;
+	private PromotionList promoList;
+
+	/** Getters and Setters ***/
+	public PromotionList getPromoList() {
+		return promoList;
+	}
+
+	public void setPromoList(PromotionList promoList) {
+		this.promoList = promoList;
+	}
 
 	public PromoApprenant getPromoApprenant() {
 		return promoApprenant;
@@ -34,6 +46,33 @@ public class MainView extends JFrame {
 		this.promoDetail = promoDetail;
 	}
 
+	/**
+	 * Constructor takes the controller and a promolist. We make calls back into the
+	 * controller when the user interacts with the GUI.
+	 * 
+	 * @param promoController
+	 * @param promoList
+	 */
+	public MainView(PromoAppController promoController, PromotionList promoList) {
+		this.promoController = promoController;
+		this.setPromoList(promoList);
+
+		promoSelection = new PromoSelection(promoController, promoList);
+		setupFrame();
+	}
+
+	private void setupFrame() {
+		Image icon = Toolkit.getDefaultToolkit().getImage("src/icon.png");
+		this.setIconImage(icon);
+
+		this.setSize(600, 400);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setTitle("Gestion Promotions");
+		this.setContentPane(promoSelection);
+//		this.pack();
+		this.setVisible(true);
+	}
+
 	public PromoSelection getPromoSelection() {
 		return promoSelection;
 	}
@@ -42,53 +81,49 @@ public class MainView extends JFrame {
 		this.promoSelection = promoSelection;
 	}
 
-	public MainView(PromoAppController promoController, PromotionList promoList) {
+	public void newPromotionClicked() {
+		promoDetail = new PromoDetail(promoController);
+		setComponent(promoDetail);
+	}
+
+	public void updatePromotionClicked(Promotion promo) {
+		promoDetail = new PromoDetail(promoController, promo);
+		setComponent(promoDetail);
+	}
+
+	public void updateApprenantClicked(Apprenant apprenant) {
+		promoApprenant = new PromoApprenant(promoController, promoDetail.getPromotion(), apprenant);
+		setComponent(promoApprenant);
+	}
+
+	public void deletePromotionClicked(Promotion promo) {
+		System.out.println("Not implemented yet!!");
+	}
+
+	public void newApprenantClicked() {
+		promoApprenant = new PromoApprenant(promoController, promoSelection.getSelectedPromotion());
+		setComponent(promoApprenant);
+	}
+
+	public void cancelApprenantClicked(Promotion promo) {
+		updatePromotionClicked(promo);
+	}
+
+	public void cancelPromotionClicked() {
 		promoSelection = new PromoSelection(promoController, promoList);
-
-		Promotion promotion = promoList.getPromoList().get(0);
-		promoDetail = new PromoDetail(promoController, promotion);
-
-		Apprenant apprenant = promotion.getApprenants().get(0);
-		promoApprenant = new PromoApprenant(promoController, apprenant);
-		
-		setupPanel();
-		setupFrame();
+		setComponent(promoSelection);
 	}
 
-	private void setupFrame() {
-		this.setContentPane(mainPanel);
-	    Image icon = Toolkit.getDefaultToolkit().getImage("src/icon.png");  
-	    this.setIconImage(icon);  
-		this.setSize(800, 800);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setTitle("Gestion Promotions");
-//		this.pack();
-		this.setVisible(true);
-	}
-
-	private void setupPanel() {
-		mainPanel = new JPanel();
-		mainPanel.add(promoSelection);
-		mainPanel.add(promoDetail);
-		mainPanel.add(promoApprenant);
-		mainPanel.setLayout(new GridLayout(3, 1));
-	}
-
-	public void promoSelectionWindow() {
-		promoSelection.setVisible(true);
-		promoDetail.setVisible(false);
-		promoApprenant.setVisible(false);
-	}
-
-	public void promoDetailWindow() {
-		promoSelection.setVisible(false);
-		promoDetail.setVisible(true);
-		promoApprenant.setVisible(false);
-	}
-
-	public void promoApprenantWindow() {
-		promoSelection.setVisible(false);
-		promoDetail.setVisible(false);
-		promoApprenant.setVisible(true);
+	/**
+	 * This removes the previous Content and add the new component. it then forces a
+	 * redraw
+	 * 
+	 * @param component
+	 */
+	public void setComponent(JPanel component) {
+		this.getContentPane().removeAll();
+		this.setContentPane(component);
+		this.revalidate(); // revalidate all the frame components
+		this.repaint(); // and repaint the frame
 	}
 }
