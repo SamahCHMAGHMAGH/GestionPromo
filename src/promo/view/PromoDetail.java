@@ -33,7 +33,7 @@ public class PromoDetail extends JPanel {
 	private JLabel namePromoLabel;
 
 	private JButton createAlternant;
-	private JButton saveAlternant;
+	private JButton updateAlternant;
 	private JButton deleteAlternant;
 	private JTextField nomPromoField;
 	private JLabel dateDebutLabel;
@@ -48,6 +48,40 @@ public class PromoDetail extends JPanel {
 	private PromoAppController promoController;
 	private Promotion promo;
 	private JMenuItem saveItem, saveAllItem;
+
+	/**
+	 * Constructor for a new apprenant, will as to select the Apprentant type via a
+	 * comboBox. Then will create the fields appropriately.
+	 * 
+	 * @param promoController
+	 */
+	public PromoDetail(PromoAppController promoController) {
+		System.out.println("PromoDetail new");
+
+		this.promoController = promoController;
+
+		this.setBackground(Color.GRAY);
+
+		namePromoLabel = new JLabel("Formations : ");
+		namePromoField = new JTextField("");
+
+		dateDebutLabel = new JLabel("Debut de la formation : ");
+		dateDebutField = new JTextField("");
+
+		dureeActuelLabel = new JLabel("Temps passee : ");
+		dureeActuelField = new JTextField("");
+
+		dureeTotalLabel = new JLabel("Duree totale : ");
+		dureeTotalField = new JTextField("");
+
+		createAlternant = new JButton("New");
+		updateAlternant = new JButton("Save");
+		deleteAlternant = new JButton("Delete");
+
+		setupLayout();
+		setupListeners();
+
+	}
 
 	public PromoDetail(PromoAppController promoController, Promotion promo) {
 		System.out.println("PromoDetail");
@@ -70,7 +104,7 @@ public class PromoDetail extends JPanel {
 		dureeTotalField = new JTextField(Integer.toString(promo.getDureeTotal()));
 
 		createAlternant = new JButton("New");
-		saveAlternant = new JButton("Save");
+		updateAlternant = new JButton("Update Promotion");
 		deleteAlternant = new JButton("Delete");
 
 		tableModelAlternant = new ApprenantTableModel(promo.getApprenants());
@@ -79,7 +113,7 @@ public class PromoDetail extends JPanel {
 
 		setupLayout();
 		setupListeners();
-
+		setupTableListeners();
 	}
 
 	private void setupLayout() {
@@ -125,7 +159,7 @@ public class PromoDetail extends JPanel {
 		gbL.gridy++;
 		this.add(createAlternant, gbL);
 		gbL.gridx++;
-		this.add(saveAlternant, gbL);
+		this.add(updateAlternant, gbL);
 		gbL.gridx++;
 		this.add(deleteAlternant, gbL);
 
@@ -142,16 +176,14 @@ public class PromoDetail extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-
+				promoController.createNewApprenant();
 			}
 		});
-		saveAlternant.addActionListener(new ActionListener() {
+		updateAlternant.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				save();
-				promoController.savePromotion(promo);
+				promoController.updatePromotion(promo);
 			}
 		});
 
@@ -163,29 +195,31 @@ public class PromoDetail extends JPanel {
 
 			}
 		});
-
-//		alternantTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-//
-//			@Override
-//			public void valueChanged(ListSelectionEvent e) {
-//				if (!e.getValueIsAdjusting()) {
-//					ListSelectionModel lsm = (ListSelectionModel) e.getSource();
-//					int row = lsm.getMinSelectionIndex();
-//					if (!lsm.isSelectionEmpty()) {
-//						Apprenant apprenant = promo.getApprenants().get(row);
-//						promoController.changeApprenant(apprenant);
-//					}
-//				}
-//			}
-//		});
-
 	}
+private void setupTableListeners() {
 
+	alternantTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+
+		private Apprenant selectedApprenant;
+
+		@Override
+		public void valueChanged(ListSelectionEvent e) {
+			if (!e.getValueIsAdjusting()) {
+				ListSelectionModel lsm = (ListSelectionModel) e.getSource();
+				int row = lsm.getMinSelectionIndex();
+				if (!lsm.isSelectionEmpty()) {
+					Apprenant apprenant = promo.getApprenants().get(row);
+					selectedApprenant = apprenant;
+				}
+			}
+		}
+	});
+
+
+}
 	public void save() {
 		promo.setNomPromotion(namePromoField.getText());
 		promo.setDateDebutPromotion(LocalDate.now());
-		
-		promoController.promoSaved(promo);		
 	}
 
 //	public void changePromotion(Promotion promo) {

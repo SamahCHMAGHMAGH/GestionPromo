@@ -50,6 +50,54 @@ public class PromoApprenant extends JPanel {
 	private JLabel montantSalaireApprenantLabel;
 	private JTextField montantSalaireField;
 
+	/**
+	 * Constructor for a new apprenant, will as to select the Apprentant
+	 * type via a comboBox. Then will create the fields appropriately.
+	 * @param promoController
+	 */
+	public PromoApprenant(PromoAppController promoController) {
+		System.out.println("New Apprenant");
+		this.promoController = promoController;
+
+		nomLabel = new JLabel("Nom");
+		nomField = new JTextField("");
+
+		prenomLabel = new JLabel("Prénom");
+		prenomField = new JTextField("");
+
+		dateInscriptionLabel = new JLabel("Date d'inscription");
+		dateInscriptionField = new JTextField("");
+
+		emailLabel = new JLabel("émail");
+		emailField = new JTextField("");
+
+		mobileLabel = new JLabel("mobile");
+		mobileField = new JTextField("");
+
+		retardLabel = new JLabel("retard");
+		retardField = new JTextField("0");
+
+		absenceLabel = new JLabel("absence");
+		absenceField = new JTextField("0");
+
+		saveApprenant = new JButton("Save");
+		cancelApprenant = new JButton("Cancel");
+
+		nomEntrepriseLabel = new JLabel("Nom d'entreprise");
+		nomEntrepriseField = new JTextField("");
+
+		typeAllocationLabel = new JLabel("rémunération");
+		typeAllocationField = new JTextField("");
+
+		montantAllocationStagiaireLabel = new JLabel("allocation");
+		montantAllocationField = new JTextField("");
+
+		montantSalaireApprenantLabel = new JLabel("salaire");
+		montantSalaireField = new JTextField("");
+
+		SetUpLayout();
+	}
+
 	public PromoApprenant(PromoAppController promoController, Apprenant apprenant) {
 		System.out.println("PromoApprenant");
 		System.out.println(apprenant);
@@ -185,7 +233,10 @@ public class PromoApprenant extends JPanel {
 		gbR.gridy++;
 
 	}
-//
+
+	public void createNewApprenant() {
+	}
+
 //	public void changeApprenant(Apprenant apprenant) {
 //		nomField.setText(apprenant.getNom());
 //		prenomField.setText(apprenant.getPrenom());

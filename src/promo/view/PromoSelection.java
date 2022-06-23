@@ -36,6 +36,7 @@ public class PromoSelection extends JPanel {
 	private PromoTableModel tableModel;
 	private PromoAppController promoController;
 	private PromotionList promoList;
+	private Promotion selectedPromotion;
 
 	public PromoSelection(PromoAppController promoController, PromotionList promoList) {
 		System.out.println("PromoSelection");
@@ -50,7 +51,9 @@ public class PromoSelection extends JPanel {
 
 		createPromotion = new JButton("New Promo");
 		savePromotion = new JButton("Update Promo");
+		savePromotion.setEnabled(false);
 		deletePromotion = new JButton("Delete Promo");
+		deletePromotion.setEnabled(false);
 
 		tableModel = new PromoTableModel(promoList.getPromoList());
 		promoJTable = new JTable(tableModel);
@@ -129,8 +132,7 @@ public class PromoSelection extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-
+				promoController.updatePromotion(selectedPromotion);
 			}
 		});
 
@@ -138,8 +140,7 @@ public class PromoSelection extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-
+				promoController.deletePromotion(selectedPromotion);
 			}
 		});
 
@@ -161,19 +162,22 @@ public class PromoSelection extends JPanel {
 			}
 		});
 
-//		promoJTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-//
-//			@Override
-//			public void valueChanged(ListSelectionEvent e) {
-//				if (!e.getValueIsAdjusting()) {
-//					ListSelectionModel lsm = (ListSelectionModel) e.getSource();
-//					int row = lsm.getMinSelectionIndex();
-//					if (!lsm.isSelectionEmpty()) {
-//						Promotion promo = promoList.getPromoList().get(row);
-//						promoController.changePromotion(promo);
-//					}
-//				}
-//			}
-//		});
+		promoJTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				if (!e.getValueIsAdjusting()) {
+					deletePromotion.setEnabled(true);
+					savePromotion.setEnabled(true);
+
+					ListSelectionModel lsm = (ListSelectionModel) e.getSource();
+					int row = lsm.getMinSelectionIndex();
+					if (!lsm.isSelectionEmpty()) {
+						Promotion promo = promoList.getPromoList().get(row);
+						selectedPromotion = promo;
+					}
+				}
+			}
+		});
 	}
 }

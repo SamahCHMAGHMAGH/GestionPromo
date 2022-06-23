@@ -28,7 +28,6 @@ public class MainView extends JFrame {
 		this.promoList = promoList;
 	}
 
-
 	public PromoApprenant getPromoApprenant() {
 		return promoApprenant;
 	}
@@ -54,8 +53,8 @@ public class MainView extends JFrame {
 	}
 
 	/**
-	 * Constructor takes the controller and a promolist. 
-	 * We make calls back into the controller when the user interacts with the GUI.
+	 * Constructor takes the controller and a promolist. We make calls back into the
+	 * controller when the user interacts with the GUI.
 	 * 
 	 * @param promoController
 	 * @param promoList
@@ -85,20 +84,32 @@ public class MainView extends JFrame {
 	}
 
 	public void createNewPromotion() {
-		Promotion promo = new Promotion();
+		promoDetail = new PromoDetail(promoController);
+		setComponent(promoDetail);
+	}
+
+	public void updatePromotion(Promotion promo) {
 		promoDetail = new PromoDetail(promoController, promo);
 		setComponent(promoDetail);
 	}
 
+	public void deletePromotion(Promotion promo) {
+		System.out.println("Not implemented yet!!");
+	}
+
+	public void createNewApprenant() {
+		promoApprenant = new PromoApprenant(promoController);
+		setComponent(promoApprenant);
+	}
 	/**
 	 * This removes the previous Content and add the new component. it then forces a
 	 * redraw
 	 * 
 	 * @param component
 	 */
-	public void setComponent(Component component) {
+	public void setComponent(JPanel component) {
 		this.getContentPane().removeAll();
-		this.getContentPane().add(component, 0);
+		this.setContentPane(component);
 		this.revalidate(); // revalidate all the frame components
 		this.repaint(); // and repaint the frame
 	}
