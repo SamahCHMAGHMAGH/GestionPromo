@@ -1,6 +1,8 @@
 package promo.view;
 
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -55,6 +57,8 @@ public class MainView extends JFrame {
 
 	private void setupFrame() {
 		this.setContentPane(mainPanel);
+	    Image icon = Toolkit.getDefaultToolkit().getImage("src/icon.png");  
+	    this.setIconImage(icon);  
 		this.setSize(700, 700);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("Gestion Promotions");

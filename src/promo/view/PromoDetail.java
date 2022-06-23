@@ -1,6 +1,7 @@
 package promo.view;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -54,19 +55,27 @@ public class PromoDetail extends JPanel {
 		this.promoController = promoController;
 		this.promo = promo;
 
-		this.setBackground(Color.GRAY);
+		this.setBackground(Color.getHSBColor(200, 100, 50));
 
 		namePromoLabel = new JLabel("Formations : ");
 		namePromoField = new JTextField(promo.getNomPromotion());
+		namePromoLabel.setFont(new Font("Arial", Font.BOLD, 15));
+	
 
 		dateDebutLabel = new JLabel("Debut de la formation : ");
 		dateDebutField = new JTextField(promo.getDateDebutPromotion().toString());
+		dateDebutLabel.setFont(new Font("Arial", Font.BOLD, 15));
+	
 
 		dureeActuelLabel = new JLabel("Temps passee : ");
 		dureeActuelField = new JTextField(promo.joursPasses().toString());
+		dureeActuelLabel.setFont(new Font("Arial", Font.BOLD, 15));
+	
 
 		dureeTotalLabel = new JLabel("Duree totale : ");
 		dureeTotalField = new JTextField(Integer.toString(promo.getDureeTotal()));
+		dureeTotalLabel.setFont(new Font("Arial", Font.BOLD, 15));
+		
 
 		createAlternant = new JButton("New");
 		saveAlternant = new JButton("Save");
@@ -75,7 +84,8 @@ public class PromoDetail extends JPanel {
 		tableModelAlternant = new ApprenantTableModel(promo.getApprenants());
 		alternantTable = new JTable(tableModelAlternant);
 		alternantTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
+		alternantTable.setBackground(Color.getHSBColor(200, 100, 50));
+		
 		setupLayout();
 		setupListeners();
 
@@ -88,7 +98,7 @@ public class PromoDetail extends JPanel {
 		gbL.gridx = 0;
 		gbL.gridy = 0;
 		gbL.anchor = GridBagConstraints.LINE_END;
-		gbL.insets = new Insets(0, 0, 0, 10);
+		gbL.insets = new Insets(10, 10, 10, 10);
 
 		GridBagConstraints gbR = new GridBagConstraints();
 		gbR.weightx = 1;
@@ -120,17 +130,18 @@ public class PromoDetail extends JPanel {
 		gbL.anchor = GridBagConstraints.LINE_START;
 		gbL.weightx = 0.5;
 
-		gbL.gridx = 0;
+		gbL.gridx = 25;
 		gbL.gridy++;
 		this.add(createAlternant, gbL);
-		gbL.gridx++;
+		gbL.gridx = 30;
 		this.add(saveAlternant, gbL);
-		gbL.gridx++;
+		gbL.gridx = 35;
 		this.add(deleteAlternant, gbL);
 
-		gbL.gridx = 0;
-		gbL.gridy++;
-		gbL.gridwidth = 3;
+		gbL.gridx = 25;
+		gbL.gridy = 1;
+		gbL.gridwidth = 10;
+		gbL.gridheight =4;
 		gbL.fill = GridBagConstraints.BOTH;
 		gbL.weighty = 1;
 		this.add(new JScrollPane(alternantTable), gbL);
