@@ -185,29 +185,29 @@ public class PromoApprenant extends JPanel {
 		gbR.gridy++;
 
 	}
-
-	public void changeApprenant(Apprenant apprenant) {
-		nomField.setText(apprenant.getNom());
-		prenomField.setText(apprenant.getPrenom());
-		dateInscriptionField.setText(apprenant.getDateInscription().toString());
-		emailField.setText(apprenant.getEmail());
-		mobileField.setText(apprenant.getMobile());
-		retardField.setText(Integer.toString(apprenant.getRetard()));
-		absenceField.setText(Integer.toString(apprenant.getRetard()));
-		
-		if (apprenant instanceof Stagiaire) {
-			nomEntrepriseField.setText("N/A");
-			typeAllocationField.setText(((Stagiaire) apprenant).getTypeAllocation());
-			montantAllocationField.setText(((Stagiaire) apprenant).getMontantAllocation().toString());
-			montantSalaireField.setText("n/a");
-		}
-
-		if (apprenant instanceof Alternant) {
-			nomEntrepriseField.setText(((Alternant) apprenant).getNomEntreprise());
-			montantSalaireField.setText(((Alternant) apprenant).getSalaire().toString());
-			typeAllocationField.setText("n/a");
-			montantAllocationField.setText("n/a");
-		}
-	}
+//
+//	public void changeApprenant(Apprenant apprenant) {
+//		nomField.setText(apprenant.getNom());
+//		prenomField.setText(apprenant.getPrenom());
+//		dateInscriptionField.setText(apprenant.getDateInscription().toString());
+//		emailField.setText(apprenant.getEmail());
+//		mobileField.setText(apprenant.getMobile());
+//		retardField.setText(Integer.toString(apprenant.getRetard()));
+//		absenceField.setText(Integer.toString(apprenant.getRetard()));
+//		
+//		if (apprenant instanceof Stagiaire) {
+//			nomEntrepriseField.setText("N/A");
+//			typeAllocationField.setText(((Stagiaire) apprenant).getTypeAllocation());
+//			montantAllocationField.setText(((Stagiaire) apprenant).getMontantAllocation().toString());
+//			montantSalaireField.setText("n/a");
+//		}
+//
+//		if (apprenant instanceof Alternant) {
+//			nomEntrepriseField.setText(((Alternant) apprenant).getNomEntreprise());
+//			montantSalaireField.setText(((Alternant) apprenant).getSalaire().toString());
+//			typeAllocationField.setText("n/a");
+//			montantAllocationField.setText("n/a");
+//		}
+//	}
 
 }

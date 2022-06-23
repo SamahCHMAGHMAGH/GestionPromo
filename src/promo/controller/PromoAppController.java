@@ -50,12 +50,19 @@ public class PromoAppController {
 		return test;
 	}
 
-	public void changePromotion(Promotion promo) {
-		mainView.getPromoDetail().changePromotion(promo);
+
+	public void createNewPromotion() {
+		mainView.createNewPromotion();		
 	}
 
-	public void changeApprenant(Apprenant apprenant) {
-		mainView.getPromoApprenant().changeApprenant(apprenant);
+	public void savePromotion(Promotion promo) {
+		mainView.getPromoList().addPromotion(promo);
+			
+	}
+
+	public void promoSaved(Promotion promo) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

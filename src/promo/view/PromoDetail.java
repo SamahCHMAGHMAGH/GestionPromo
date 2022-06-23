@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -149,8 +150,8 @@ public class PromoDetail extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-
+				save();
+				promoController.savePromotion(promo);
 			}
 		});
 
@@ -163,30 +164,37 @@ public class PromoDetail extends JPanel {
 			}
 		});
 
-		alternantTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				if (!e.getValueIsAdjusting()) {
-					ListSelectionModel lsm = (ListSelectionModel) e.getSource();
-					int row = lsm.getMinSelectionIndex();
-					if (!lsm.isSelectionEmpty()) {
-						Apprenant apprenant = promo.getApprenants().get(row);
-						promoController.changeApprenant(apprenant);
-					}
-				}
-			}
-		});
+//		alternantTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+//
+//			@Override
+//			public void valueChanged(ListSelectionEvent e) {
+//				if (!e.getValueIsAdjusting()) {
+//					ListSelectionModel lsm = (ListSelectionModel) e.getSource();
+//					int row = lsm.getMinSelectionIndex();
+//					if (!lsm.isSelectionEmpty()) {
+//						Apprenant apprenant = promo.getApprenants().get(row);
+//						promoController.changeApprenant(apprenant);
+//					}
+//				}
+//			}
+//		});
 
 	}
 
-	public void changePromotion(Promotion promo) {
-		namePromoField.setText(promo.getNomPromotion());
-		dateDebutField.setText(promo.getDateDebutPromotion().toString());
-		dureeActuelField.setText(promo.joursPasses().toString());
-		dureeTotalField.setText(Integer.toString(promo.getDureeTotal()));
+	public void save() {
+		promo.setNomPromotion(namePromoField.getText());
+		promo.setDateDebutPromotion(LocalDate.now());
 		
-		tableModelAlternant = new ApprenantTableModel(promo.getApprenants());
-		alternantTable = new JTable(tableModelAlternant);
+		promoController.promoSaved(promo);		
 	}
+
+//	public void changePromotion(Promotion promo) {
+//		namePromoField.setText(promo.getNomPromotion());
+//		dateDebutField.setText(promo.getDateDebutPromotion().toString());
+//		dureeActuelField.setText(promo.joursPasses().toString());
+//		dureeTotalField.setText(Integer.toString(promo.getDureeTotal()));
+//		
+//		tableModelAlternant = new ApprenantTableModel(promo.getApprenants());
+//		alternantTable = new JTable(tableModelAlternant);
+//	}
 }

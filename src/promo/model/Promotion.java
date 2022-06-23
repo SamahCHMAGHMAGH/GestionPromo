@@ -4,11 +4,36 @@ import java.time.Clock;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Promotion {
 
 	protected String nomPromotion;
+
+	public int getDelai() {
+		return delai;
+	}
+
+	public void setDelai(int delai) {
+		this.delai = delai;
+	}
+
+	public int getAbsence() {
+		return absence;
+	}
+
+	public void setAbsence(int absence) {
+		this.absence = absence;
+	}
+
+	public void setNomPromotion(String nomPromotion) {
+		this.nomPromotion = nomPromotion;
+	}
+
+	public void setApprenants(List<Apprenant> apprenants) {
+		this.apprenants = apprenants;
+	}
 
 	public String getNomPromotion() {
 		return nomPromotion;
@@ -41,6 +66,13 @@ public class Promotion {
 		this.dateDebutPromotion = dateDebutPromotion;
 		this.dureeTotal = dureeTotal;
 		this.apprenants = apprenants;
+	}
+
+	public Promotion() {
+		this.nomPromotion = "";
+		this.dateDebutPromotion = LocalDate.now(Clock.systemDefaultZone());
+		this.dureeTotal = 0;
+		this.apprenants = new ArrayList<>();
 	}
 
 	public void setDateDebutPromotion(LocalDate dateDebutPromotion) {
