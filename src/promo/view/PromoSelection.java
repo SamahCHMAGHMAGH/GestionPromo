@@ -1,6 +1,7 @@
 package promo.view;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -43,8 +44,9 @@ public class PromoSelection extends JPanel {
 		this.promoController = promoController;
 		this.promoList = promoList;
 
-		nameLabel = new JLabel("Name");
+		nameLabel = new JLabel("Name : ");
 		nameField = new JTextField(promoList.getName());
+		nameLabel.setFont(new Font("Arial", Font.BOLD, 15));
 
 		createPromotion = new JButton("New");
 		savePromotion = new JButton("Save");
@@ -52,6 +54,7 @@ public class PromoSelection extends JPanel {
 
 		tableModel = new PromoTableModel(promoList.getPromoList());
 		promoJTable = new JTable(tableModel);
+		promoJTable.setBackground(Color.getHSBColor(200, 100, 50));
 
 		backupPromoList = new JButton("Backup");
 		restorePromoList = new JButton("Restore");
@@ -67,7 +70,7 @@ public class PromoSelection extends JPanel {
 		gbL.gridx = 0;
 		gbL.gridy = 0;
 		gbL.anchor = GridBagConstraints.LINE_END;
-		gbL.insets = new Insets(0, 0, 0, 10);
+		gbL.insets = new Insets(2, 10, 2, 10);
 
 		GridBagConstraints gbR = new GridBagConstraints();
 		gbR.weightx = 0.8;
@@ -90,11 +93,7 @@ public class PromoSelection extends JPanel {
 		gbL.gridx++;
 		this.add(deletePromotion, gbL);
 
-		gbL.gridx = 0;
-		gbL.gridy++;
-		this.add(backupPromoList, gbL);
-		gbL.gridx += 2;
-		this.add(restorePromoList, gbL);
+		
 
 		gbL.gridx = 0;
 		gbL.gridy++;
@@ -102,6 +101,15 @@ public class PromoSelection extends JPanel {
 		gbL.fill = GridBagConstraints.BOTH;
 		gbL.weighty = 1;
 		this.add(new JScrollPane(promoJTable), gbL);
+		
+		gbL.fill = GridBagConstraints.NONE;
+		gbL.gridx = 0;
+		gbL.gridy++;
+		this.add(backupPromoList, gbL);
+		gbL.gridx = 1;
+		this.add(restorePromoList, gbL);
+		
+		
 	}
 
 	private void setupListeners() {

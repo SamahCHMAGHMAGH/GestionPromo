@@ -59,7 +59,7 @@ public class MainView extends JFrame {
 		this.setContentPane(mainPanel);
 	    Image icon = Toolkit.getDefaultToolkit().getImage("src/icon.png");  
 	    this.setIconImage(icon);  
-		this.setSize(700, 700);
+		this.setSize(800, 800);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("Gestion Promotions");
 //		this.pack();

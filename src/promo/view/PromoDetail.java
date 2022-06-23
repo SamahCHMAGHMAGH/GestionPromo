@@ -84,7 +84,7 @@ public class PromoDetail extends JPanel {
 		tableModelAlternant = new ApprenantTableModel(promo.getApprenants());
 		alternantTable = new JTable(tableModelAlternant);
 		alternantTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		alternantTable.setBackground(Color.getHSBColor(200, 100, 50));
+		alternantTable.setBackground(Color.cyan);
 		
 		setupLayout();
 		setupListeners();
