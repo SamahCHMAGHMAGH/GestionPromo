@@ -69,10 +69,8 @@ public class PromoApprenant extends JPanel {
 	 * @param promoController
 	 */
 	public PromoApprenant(PromoAppController promoController, Promotion promo) {
-		System.out.println("New Apprenant");
 		this.promoController = promoController;
 		this.promo = promo;
-		// Insert Comobo box here
 
 		String S1[] = { "Stagiaire", "Alternant" };
 		comboboxLabel = new JLabel("Apprenant Type");
@@ -110,10 +108,10 @@ public class PromoApprenant extends JPanel {
 		typeAllocationField = new JTextField("");
 
 		montantAllocationStagiaireLabel = new JLabel("allocation");
-		montantAllocationField = new JTextField("");
+		montantAllocationField = new JTextField("0");
 
 		montantSalaireApprenantLabel = new JLabel("salaire");
-		montantSalaireField = new JTextField("");
+		montantSalaireField = new JTextField("0");
 
 		SetUpLayout();
 		setupListeners();
@@ -229,10 +227,41 @@ public class PromoApprenant extends JPanel {
 			}
 		});
 
+		saveApprenant.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (combobox.getSelectedItem().toString() == "Stagiaire") {
+					stagiaire.setTypeAllocation(typeAllocationField.getText());
+					stagiaire.setMontantAllocation(Double.parseDouble(montantAllocationField.getText()));
+					promoController.saveApprenantClicked(promo, stagiaire);
+				} else {
+					alternant.setSalaire(Double.parseDouble(montantSalaireField.getText()));
+					alternant.setNomEntreprise(nomEntrepriseField.getText());
+					promoController.saveApprenantClicked(promo, alternant);
+				}
+				apprenant.setNom(nomField.getText());
+				apprenant.setEmail(emailField.getText());
+//TODO Fill in all the other fields
+				promoController.saveApprenantClicked(promo, apprenant);
+			}
+		});
+
 		combobox.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				// apprenant is null when we are creating a new apprenant
+				// so create an instance of the sub class object then cast
+				// to apprenant;
+				if (apprenant == null) {
+					if (combobox.getSelectedItem().toString() == "Stagiaire") {
+						stagiaire = new Stagiaire();
+					} else {
+						alternant = new Alternant();
+					}
+					apprenant = (Apprenant) alternant;
+				}
 				setEnabled();
 			}
 		});

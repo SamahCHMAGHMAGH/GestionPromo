@@ -50,7 +50,7 @@ public class PromoAppController {
 		return test;
 	}
 
-	//calls from the View pass onto the mainVeiw object
+	// calls from the View pass onto the mainVeiw object
 	public void newPromotionClicked() {
 		mainView.newPromotionClicked();
 	}
@@ -77,5 +77,9 @@ public class PromoAppController {
 
 	public void updateApprenantClicked(Apprenant selectedApprenant) {
 		mainView.updateApprenantClicked(selectedApprenant);
+	}
+
+	public void saveApprenantClicked(Promotion promo, Apprenant apprenant) {
+		mainView.saveApprenantClicked(promo, apprenant);
 	}
 }

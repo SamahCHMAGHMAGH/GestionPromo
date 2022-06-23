@@ -23,6 +23,9 @@ public abstract class Apprenant {
 		this.absence = 0;
 	}
 
+	public Apprenant() {
+	}
+
 	public String getNom() {
 		return nom;
 	}

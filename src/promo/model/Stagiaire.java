@@ -7,6 +7,10 @@ public class Stagiaire extends Apprenant {
 	protected String typeAllocation;
 	protected double montantAllocation;
 
+	public Stagiaire() {
+
+	}
+
 	public Stagiaire(String nom, String prenom, LocalDate dateInscription, String email, String mobile,
 			String typeAllocation, double montantAllocation) {
 		super(nom, prenom, dateInscription, email, mobile);

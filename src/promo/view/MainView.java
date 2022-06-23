@@ -126,4 +126,9 @@ public class MainView extends JFrame {
 		this.revalidate(); // revalidate all the frame components
 		this.repaint(); // and repaint the frame
 	}
+
+	public void saveApprenantClicked(Promotion promo, Apprenant apprenant) {
+		promo.getApprenants().add(apprenant);
+		updatePromotionClicked(promo);
+	}
 }
