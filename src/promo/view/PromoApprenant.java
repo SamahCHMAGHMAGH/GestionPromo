@@ -5,6 +5,8 @@ import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.time.LocalDate;
 
 import javax.swing.JButton;
@@ -15,6 +17,7 @@ import javax.swing.JTextField;
 import promo.controller.PromoAppController;
 import promo.model.Alternant;
 import promo.model.Apprenant;
+import promo.model.Promotion;
 import promo.model.Stagiaire;
 
 public class PromoApprenant extends JPanel {
@@ -40,7 +43,6 @@ public class PromoApprenant extends JPanel {
 	private JTextField absenceField;
 	private JButton saveApprenant;
 	private JButton cancelApprenant;
-	private PromoAppController promoController;
 	private JLabel nomEntrepriseLabel;
 	private JTextField nomEntrepriseField;
 	private JLabel typeAllocationLabel;
@@ -50,17 +52,26 @@ public class PromoApprenant extends JPanel {
 	private JLabel montantSalaireApprenantLabel;
 	private JTextField montantSalaireField;
 
+	private PromoAppController promoController;
+	private Promotion promo;
+	private Apprenant apprenant;
+
 	/**
-	 * Constructor for a new apprenant, will as to select the Apprentant
-	 * type via a comboBox. Then will create the fields appropriately.
+	 * Constructor for a new apprenant, will as to select the Apprentant type via a
+	 * comboBox. Then will create the fields appropriately.
+	 * 
 	 * @param promoController
 	 */
-	public PromoApprenant(PromoAppController promoController) {
+	public PromoApprenant(PromoAppController promoController, Promotion promo) {
 		System.out.println("New Apprenant");
 		this.promoController = promoController;
+		this.promo = promo;
+		// Insert Comobo box here
 
+		// All fields will be disabled until after the type of Apprenant is selected
 		nomLabel = new JLabel("Nom");
 		nomField = new JTextField("");
+		nomField.setEnabled(false);// Set enabled false for all fields
 
 		prenomLabel = new JLabel("Prénom");
 		prenomField = new JTextField("");
@@ -96,14 +107,17 @@ public class PromoApprenant extends JPanel {
 		montantSalaireField = new JTextField("");
 
 		SetUpLayout();
+		setupListeners();
 	}
 
-	public PromoApprenant(PromoAppController promoController, Apprenant apprenant) {
+	public PromoApprenant(PromoAppController promoController, Promotion promo, Apprenant apprenant) {
 		System.out.println("PromoApprenant");
 		System.out.println(apprenant);
 
 //		this.setBackground(Color.LIGHT_GRAY);
 		this.promoController = promoController;
+		this.promo = promo;
+		this.apprenant = apprenant;
 
 		nomLabel = new JLabel("Nom");
 		nomField = new JTextField(apprenant.getNom());
@@ -158,7 +172,17 @@ public class PromoApprenant extends JPanel {
 		}
 
 		SetUpLayout();
+		setupListeners();
+	}
 
+	private void setupListeners() {
+		cancelApprenant.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				promoController.cancelApprenantClicked(promo);
+			}
+		});
 	}
 
 	private void SetUpLayout() {
@@ -233,32 +257,4 @@ public class PromoApprenant extends JPanel {
 		gbR.gridy++;
 
 	}
-
-	public void createNewApprenant() {
-	}
-
-//	public void changeApprenant(Apprenant apprenant) {
-//		nomField.setText(apprenant.getNom());
-//		prenomField.setText(apprenant.getPrenom());
-//		dateInscriptionField.setText(apprenant.getDateInscription().toString());
-//		emailField.setText(apprenant.getEmail());
-//		mobileField.setText(apprenant.getMobile());
-//		retardField.setText(Integer.toString(apprenant.getRetard()));
-//		absenceField.setText(Integer.toString(apprenant.getRetard()));
-//		
-//		if (apprenant instanceof Stagiaire) {
-//			nomEntrepriseField.setText("N/A");
-//			typeAllocationField.setText(((Stagiaire) apprenant).getTypeAllocation());
-//			montantAllocationField.setText(((Stagiaire) apprenant).getMontantAllocation().toString());
-//			montantSalaireField.setText("n/a");
-//		}
-//
-//		if (apprenant instanceof Alternant) {
-//			nomEntrepriseField.setText(((Alternant) apprenant).getNomEntreprise());
-//			montantSalaireField.setText(((Alternant) apprenant).getSalaire().toString());
-//			typeAllocationField.setText("n/a");
-//			montantAllocationField.setText("n/a");
-//		}
-//	}
-
 }

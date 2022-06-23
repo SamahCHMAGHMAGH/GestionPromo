@@ -124,7 +124,7 @@ public class PromoSelection extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				promoController.createNewPromotion();
+				promoController.newPromotionClicked();
 			}
 		});
 
@@ -132,7 +132,7 @@ public class PromoSelection extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				promoController.updatePromotion(selectedPromotion);
+				promoController.updatePromotionClicked(selectedPromotion);
 			}
 		});
 
@@ -140,7 +140,7 @@ public class PromoSelection extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				promoController.deletePromotion(selectedPromotion);
+				promoController.deletePromotionClicked(selectedPromotion);
 			}
 		});
 

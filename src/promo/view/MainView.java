@@ -44,14 +44,6 @@ public class MainView extends JFrame {
 		this.promoDetail = promoDetail;
 	}
 
-	public PromoSelection getPromoSelection() {
-		return promoSelection;
-	}
-
-	public void setPromoSelection(PromoSelection promoSelection) {
-		this.promoSelection = promoSelection;
-	}
-
 	/**
 	 * Constructor takes the controller and a promolist. We make calls back into the
 	 * controller when the user interacts with the GUI.
@@ -83,24 +75,47 @@ public class MainView extends JFrame {
 		this.setVisible(true);
 	}
 
-	public void createNewPromotion() {
+	public PromoSelection getPromoSelection() {
+		return promoSelection;
+	}
+
+	public void setPromoSelection(PromoSelection promoSelection) {
+		this.promoSelection = promoSelection;
+	}
+
+	public void newPromotionClicked() {
 		promoDetail = new PromoDetail(promoController);
 		setComponent(promoDetail);
 	}
 
-	public void updatePromotion(Promotion promo) {
+	public void updatePromotionClicked(Promotion promo) {
 		promoDetail = new PromoDetail(promoController, promo);
 		setComponent(promoDetail);
 	}
 
-	public void deletePromotion(Promotion promo) {
+	public void updateApprenantClicked(Apprenant apprenant) {
+		promoApprenant = new PromoApprenant(promoController, promoDetail.getPromotion(), apprenant);
+		setComponent(promoApprenant);
+	}
+
+	public void deletePromotionClicked(Promotion promo) {
 		System.out.println("Not implemented yet!!");
 	}
 
-	public void createNewApprenant() {
-		promoApprenant = new PromoApprenant(promoController);
+	public void newApprenantClicked() {
+		promoApprenant = new PromoApprenant(promoController, promoDetail.getPromotion());
 		setComponent(promoApprenant);
 	}
+
+	public void cancelApprenantClicked(Promotion promo) {
+		updatePromotionClicked(promo);
+	}
+
+	public void cancelPromotionClicked() {
+		promoSelection = new PromoSelection(promoController, promoList);
+		setComponent(promoSelection);
+	}
+
 	/**
 	 * This removes the previous Content and add the new component. it then forces a
 	 * redraw

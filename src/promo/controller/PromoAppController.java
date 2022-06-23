@@ -50,19 +50,32 @@ public class PromoAppController {
 		return test;
 	}
 
-	public void createNewPromotion() {
-		mainView.createNewPromotion();
+	//calls from the View pass onto the mainVeiw object
+	public void newPromotionClicked() {
+		mainView.newPromotionClicked();
 	}
 
-	public void updatePromotion(Promotion promo) {
-		mainView.updatePromotion(promo);
+	public void updatePromotionClicked(Promotion promo) {
+		mainView.updatePromotionClicked(promo);
 	}
 
-	public void deletePromotion(Promotion promo) {
-		mainView.deletePromotion(promo);
+	public void deletePromotionClicked(Promotion promo) {
+		mainView.deletePromotionClicked(promo);
 	}
 
-	public void createNewApprenant() {
-		mainView.createNewApprenant();
+	public void newApprenantClicked() {
+		mainView.newApprenantClicked();
+	}
+
+	public void cancelApprenantClicked(Promotion promo) {
+		mainView.cancelApprenantClicked(promo);
+	}
+
+	public void cancelPromotionClicked() {
+		mainView.cancelPromotionClicked();
+	}
+
+	public void updateApprenantClicked(Apprenant selectedApprenant) {
+		mainView.updateApprenantClicked(selectedApprenant);
 	}
 }
