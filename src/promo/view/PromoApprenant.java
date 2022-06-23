@@ -81,7 +81,6 @@ public class PromoApprenant extends JPanel {
 		// All fields will be disabled until after the type of Apprenant is selected
 		nomLabel = new JLabel("Nom");
 		nomField = new JTextField("");
-		nomField.setEnabled(false);// Set enabled false for all fields
 
 		prenomLabel = new JLabel("Prénom");
 		prenomField = new JTextField("");
@@ -118,6 +117,7 @@ public class PromoApprenant extends JPanel {
 
 		SetUpLayout();
 		setupListeners();
+		setEnabled();
 	}
 
 	public PromoApprenant(PromoAppController promoController, Promotion promo, Apprenant apprenant) {
@@ -136,10 +136,10 @@ public class PromoApprenant extends JPanel {
 
 		if (apprenant instanceof Stagiaire) {
 			stagiaire = (Stagiaire) apprenant;
-			// TODO Set combobox to Stagiaire
+			combobox.setSelectedIndex(0);
 		} else {
 			alternant = (Alternant) apprenant;
-			// TODO Set combobox to Alternant
+			combobox.setSelectedIndex(1);
 		}
 
 		nomLabel = new JLabel("Nom");
@@ -228,6 +228,30 @@ public class PromoApprenant extends JPanel {
 				promoController.cancelApprenantClicked(promo);
 			}
 		});
+
+		combobox.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setEnabled();
+			}
+		});
+	}
+
+	public void setEnabled() {
+		if (combobox.getSelectedItem().toString() == "Stagiaire") {
+			nomEntrepriseField.setEnabled(false);
+			montantSalaireField.setEnabled(false);
+
+			typeAllocationField.setEnabled(true);
+			montantAllocationField.setEnabled(true);
+		} else {
+			nomEntrepriseField.setEnabled(true);
+			montantSalaireField.setEnabled(true);
+
+			typeAllocationField.setEnabled(true);
+			montantAllocationField.setEnabled(false);
+		}
 	}
 
 	private void SetUpLayout() {
