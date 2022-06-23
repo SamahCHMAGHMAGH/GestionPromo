@@ -9,6 +9,7 @@ import java.awt.Insets;
 import java.time.LocalDate;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -50,6 +51,8 @@ public class PromoApprenant extends JPanel {
 	private JTextField montantAllocationField;
 	private JLabel montantSalaireApprenantLabel;
 	private JTextField montantSalaireField;
+	private JLabel comboboxLabel;
+	private JComboBox combobox;
 
 	public PromoApprenant(PromoAppController promoController, Apprenant apprenant) {
 		System.out.println("PromoApprenant");
@@ -58,6 +61,10 @@ public class PromoApprenant extends JPanel {
 		this.setBackground(Color.cyan);
 		this.promoController = promoController;
 
+		String S1[] = {"Stagiaire", "Alternant"};
+		comboboxLabel = new JLabel("Apprenant Type");
+		combobox = new JComboBox(S1);
+		
 		nomLabel = new JLabel("Nom");
 		nomField = new JTextField(apprenant.getNom());
 		nomLabel.setFont(new Font("Arial", Font.BOLD, 15));
@@ -152,7 +159,12 @@ public class PromoApprenant extends JPanel {
 		gbR.gridy = 0;
 		gbR.gridwidth = 1;
 		gbR.fill = GridBagConstraints.HORIZONTAL;
-
+	
+		this.add(comboboxLabel, gbL);
+		this.add(combobox, gbR);
+		gbL.gridy++;
+		gbR.gridy++;
+	
 		this.add(nomEntrepriseLabel, gbL);
 		this.add(nomEntrepriseField, gbR);
 		gbL.gridy++;
