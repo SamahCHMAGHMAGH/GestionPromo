@@ -284,8 +284,14 @@ public class PromoApprenant extends JPanel {
 					alternant.setNomEntreprise(nomEntrepriseField.getText());
 				}
 				apprenant.setNom(nomField.getText());
+				apprenant.setPrenom(prenomField.getText());
 				apprenant.setEmail(emailField.getText());
-//TODO Fill in all the other fields
+				apprenant.setMobile(mobileField.getText());
+				apprenant.setDateInscription(LocalDate.parse(dateInscriptionField.getText()));
+				apprenant.setRetard(Integer.parseInt(retardField.getText()));
+				apprenant.setAbsence(Integer.parseInt(absenceField.getText()));
+
+
 				promoController.saveApprenantClicked(promo, apprenant, isNewApprenant);
 			}
 		});
