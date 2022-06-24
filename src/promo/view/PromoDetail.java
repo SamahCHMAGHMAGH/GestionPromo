@@ -41,7 +41,6 @@ public class PromoDetail extends JPanel {
 	private JButton updateAlternant;
 	private JButton createAlternant;
 	private JButton deleteAlternant;
-	private JTextField nomPromoField;
 	private JLabel dateDebutLabel;
 	private JTextField dateDebutField;
 	private JLabel dureeActuelLabel;
@@ -53,6 +52,7 @@ public class PromoDetail extends JPanel {
 	private ApprenantTableModel tableModelAlternant;
 	private PromoAppController promoController;
 	private JMenuItem saveItem, saveAllItem;
+	private boolean isNewPromotion = false;
 
 	private Apprenant selectedApprenant;
 
@@ -77,8 +77,8 @@ public class PromoDetail extends JPanel {
 	 * @param promoController
 	 */
 	public PromoDetail(PromoAppController promoController) {
-
 		this.promoController = promoController;
+		this.isNewPromotion = true;
 
 		namePromoLabel = new JLabel("Formations : ");
 		namePromoField = new JTextField("");
@@ -90,7 +90,7 @@ public class PromoDetail extends JPanel {
 		dureeActuelField = new JTextField("");
 
 		dureeTotalLabel = new JLabel("Duree totale : ");
-		dureeTotalField = new JTextField("");
+		dureeTotalField = new JTextField("0");
 
 		setupButtons();
 		createAlternant.setEnabled(false);
@@ -105,8 +105,6 @@ public class PromoDetail extends JPanel {
 		System.out.println(promo);
 		this.promoController = promoController;
 		this.promotion = promo;
-
-		
 
 		namePromoLabel = new JLabel("Formations : ");
 		namePromoField = new JTextField(promo.getNomPromotion());
@@ -148,8 +146,7 @@ public class PromoDetail extends JPanel {
 	}
 
 	private void setupLayout() {
-		
-		
+
 		this.setBackground(Color.getHSBColor(0.5f, 0.5f, 0.7f));
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints gbL = new GridBagConstraints();
@@ -194,18 +191,7 @@ public class PromoDetail extends JPanel {
 		this.add(cancelPromotion, gbR);
 
 		gbL.gridx = 0;
-		gbL.gridy++;
-
-		this.add(createAlternant, gbL);
-		gbL.gridx = 1;
-		this.add(updateAlternant, gbL);
-		gbL.gridx = 2;
-		this.add(deleteAlternant, gbL);
-
-		gbL.gridx = 0;
 		gbL.gridy = 6;
-		gbL.gridwidth = 10;
-		gbL.gridheight = 4;
 
 		gbL.gridwidth = 3;
 		gbL.fill = GridBagConstraints.BOTH;
@@ -214,11 +200,20 @@ public class PromoDetail extends JPanel {
 		gbR.gridy = 7;
 		this.add(new JScrollPane(alternantTable), gbL);
 
-		gbL.gridwidth = 1;
+		gbL.gridy++;
 		gbL.weighty = 0;
-		gbL.anchor = GridBagConstraints.LINE_END;
+		gbL.gridwidth = 1;
 		gbL.fill = GridBagConstraints.NONE;
+		gbL.anchor = GridBagConstraints.LINE_START;
+		gbL.weightx = 0.5;
 
+		gbL.gridx = 0;
+		gbL.gridy++;
+		this.add(createAlternant, gbL);
+		gbL.gridx++;
+		this.add(updateAlternant, gbL);
+		gbL.gridx++;
+		this.add(deleteAlternant, gbL);
 	}
 
 	private void setupListeners() {
@@ -226,7 +221,13 @@ public class PromoDetail extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				promoController.updatePromotionClicked(promotion);
+				if (isNewPromotion) {
+					promotion = new Promotion();
+				}
+				promotion.setNomPromotion(namePromoField.getText());
+				promotion.setDureeTotal(Integer.parseInt(dureeTotalField.getText()));
+
+				promoController.updatePromotionClicked(promotion, isNewPromotion);
 			}
 		});
 		cancelPromotion.addActionListener(new ActionListener() {

@@ -148,7 +148,7 @@ public class PromoSelection extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				promoController.updatePromotionClicked(selectedPromotion);
+				promoController.updatePromotionClicked(selectedPromotion, false);
 			}
 		});
 

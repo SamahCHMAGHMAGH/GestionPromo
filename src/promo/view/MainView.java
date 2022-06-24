@@ -88,7 +88,10 @@ public class MainView extends JFrame {
 		setComponent(promoDetail);
 	}
 
-	public void updatePromotionClicked(Promotion promo) {
+	public void updatePromotionClicked(Promotion promo, boolean isNewPromotion) {
+		if (isNewPromotion) {
+			promoList.addPromotion(promo);
+		}
 		promoDetail = new PromoDetail(promoController, promo);
 		setComponent(promoDetail);
 	}
@@ -108,7 +111,7 @@ public class MainView extends JFrame {
 	}
 
 	public void cancelApprenantClicked(Promotion promo) {
-		updatePromotionClicked(promo);
+		updatePromotionClicked(promo, false);
 	}
 
 	public void cancelPromotionClicked() {
@@ -133,6 +136,6 @@ public class MainView extends JFrame {
 		if (isNewApprenant) {
 			promo.getApprenants().add(apprenant);
 		}
-		updatePromotionClicked(promo);
+		updatePromotionClicked(promo, false);
 	}
 }

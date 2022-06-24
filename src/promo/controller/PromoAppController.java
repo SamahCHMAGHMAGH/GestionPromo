@@ -55,8 +55,8 @@ public class PromoAppController {
 		mainView.newPromotionClicked();
 	}
 
-	public void updatePromotionClicked(Promotion promo) {
-		mainView.updatePromotionClicked(promo);
+	public void updatePromotionClicked(Promotion promo, boolean isNewPromotion) {
+		mainView.updatePromotionClicked(promo, isNewPromotion);
 	}
 
 	public void deletePromotionClicked(Promotion promo) {
