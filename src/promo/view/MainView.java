@@ -138,4 +138,15 @@ public class MainView extends JFrame {
 		}
 		updatePromotionClicked(promo, false);
 	}
+
+	public void updateNameClicked(String name) {
+		promoList.setName(name);
+		promoSelection = new PromoSelection(promoController, promoList);
+		setComponent(promoSelection);
+	}
+
+	public void backupPromoListClicked() {
+		promoSelection = new PromoSelection(promoController, promoList);
+		setComponent(promoSelection);
+	}
 }

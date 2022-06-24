@@ -1,8 +1,9 @@
 package promo.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public abstract class Apprenant {
+public abstract class Apprenant implements Serializable {
 
 	private String nom;
 	private String prenom;
@@ -25,7 +26,6 @@ public abstract class Apprenant {
 		this.retard = 0;
 		this.absence = 0;
 	}
-
 
 	public String getNom() {
 		return nom;
