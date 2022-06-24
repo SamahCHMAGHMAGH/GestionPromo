@@ -136,7 +136,7 @@ public class PromoDetail extends JPanel {
 
 	private void setupButtons() {
 		updatePromotion = new JButton("Update Promotion");
-		cancelPromotion = new JButton("Cancel Promotion");
+		cancelPromotion = new JButton("Back to Promotion List");
 
 		createAlternant = new JButton("New Apprenant");
 		updateAlternant = new JButton("Update Apprenant");

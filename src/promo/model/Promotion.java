@@ -1,5 +1,6 @@
 package promo.model;
 
+import java.io.Serializable;
 import java.time.Clock;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -7,7 +8,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Promotion {
+public class Promotion implements Serializable {
 
 	protected String nomPromotion;
 
@@ -85,33 +86,34 @@ public class Promotion {
 
 	// Méthode pour les jours restants
 	public Long joursPasses() {
-		
+
 		LocalDate dateDuJour = LocalDate.now(Clock.systemDefaultZone());
-		
+
 		Long diff = ChronoUnit.DAYS.between(dateDebutPromotion, dateDuJour);
-		
+
 		return diff;
-		
+
 	}
 
 	// Méthode de vérification de retard
 
 	public String verifRetard() {
 		if (this.delai > 30) {
-			
+
 			return "L'apprenant est en retard";
 		} else {
-			
+
 			return "Tout va bien";
 		}
 	}
+
 	// Méthode de vérification d'absence
 	public String verifAbsence() {
-		if (this.absence > 0.1*dureeTotal) {
-			
+		if (this.absence > 0.1 * dureeTotal) {
+
 			return "L'apprenant a trop d'absence";
 		} else {
-			
+
 			return "Tout va bien";
 		}
 	}

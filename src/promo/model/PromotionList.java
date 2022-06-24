@@ -1,8 +1,9 @@
 package promo.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class PromotionList {
+public class PromotionList implements Serializable {
 	private String name;
 	private List<Promotion> promoList;
 

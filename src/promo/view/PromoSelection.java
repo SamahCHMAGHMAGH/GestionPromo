@@ -7,6 +7,13 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -31,7 +38,6 @@ public class PromoSelection extends JPanel {
 	private JButton deletePromotion;
 
 	private JButton backupPromoList;
-	private JButton restorePromoList;
 
 	private JTable promoJTable;
 	private PromoTableModel tableModel;
@@ -72,8 +78,6 @@ public class PromoSelection extends JPanel {
 		promoJTable.setBackground(Color.getHSBColor(0.1f, 0.75f, 1f));
 
 		backupPromoList = new JButton("Backup Database");
-		restorePromoList = new JButton("Restore Database");
-
 		setupLayout();
 		setupListeners();
 	}
@@ -108,7 +112,6 @@ public class PromoSelection extends JPanel {
 		gbL.fill = GridBagConstraints.BOTH;
 		gbL.weighty = 1;
 		this.add(new JScrollPane(promoJTable), gbL);
-		
 
 		gbL.gridy++;
 		gbL.weighty = 0;
@@ -125,17 +128,20 @@ public class PromoSelection extends JPanel {
 		gbL.gridx++;
 		this.add(deletePromotion, gbL);
 
-		gbL.gridx = 0;
 		gbL.gridy++;
 		this.add(backupPromoList, gbL);
-		gbL.gridx += 2;
-		this.add(restorePromoList, gbL);
 
-
-		
 	}
 
 	private void setupListeners() {
+		updateName.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				promoController.updateNameClicked(nameField.getText());
+
+			}
+		});
 		createPromotion.addActionListener(new ActionListener() {
 
 			@Override
@@ -164,17 +170,7 @@ public class PromoSelection extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-		});
-
-		restorePromoList.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-
+				promoController.backupPromoList();
 			}
 		});
 
