@@ -125,6 +125,9 @@ public class PromoDetail extends JPanel {
 		setupButtons();
 
 		tableModelAlternant = new ApprenantTableModel(promo.getApprenants());
+		tableModelAlternant.setDelai(promo.getDelai());
+		tableModelAlternant.setDureeTotal(promo.getDureeTotal());
+		
 		alternantTable = new JTable(tableModelAlternant);
 		alternantTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		alternantTable.setBackground(Color.getHSBColor(0.1f, 0.75f, 1f));

@@ -95,28 +95,6 @@ public class Promotion implements Serializable {
 
 	}
 
-	// Méthode de vérification de retard
-
-	public String verifRetard() {
-		if (this.delai > 30) {
-
-			return "L'apprenant est en retard";
-		} else {
-
-			return "Tout va bien";
-		}
-	}
-
-	// Méthode de vérification d'absence
-	public String verifAbsence() {
-		if (this.absence > 0.1 * dureeTotal) {
-
-			return "L'apprenant a trop d'absence";
-		} else {
-
-			return "Tout va bien";
-		}
-	}
 
 	@Override
 	public String toString() {

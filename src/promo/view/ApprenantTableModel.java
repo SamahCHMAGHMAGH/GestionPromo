@@ -12,6 +12,18 @@ public class ApprenantTableModel extends AbstractTableModel {
 
 	List<Apprenant> apprenants;
 
+	private double dureeTotal;
+
+	private int delai;
+
+	public void setDureeTotal(double dureeTotal) {
+		this.dureeTotal = dureeTotal;
+	}
+
+	public void setDelai(int delai) {
+		this.delai = delai;
+	}
+
 	private static final int NOMAPPRENANT = 0;
 
 	private static final int PRENOMAPPRENANT = 1;
@@ -19,10 +31,14 @@ public class ApprenantTableModel extends AbstractTableModel {
 	private static final int STATUTAPPRENANT = 2;
 
 	private static final int NOM_TYPE = 3;
+	private static final int ALERT_ABSENCE = 4;
+	private static final int ALERT_RETARD = 5;
 
-	private static final String[] columns = new String[] { "Name", "First Name", "Type", "Details" };
+	private static final String[] columns = new String[] { "Name", "First Name", "Type", "Details", "Absence",
+			"Retard" };
 
-	private static final Class<?>[] clazz = { String.class, String.class, String.class, String.class };
+	private static final Class<?>[] clazz = { String.class, String.class, String.class, String.class, String.class,
+			String.class, String.class };
 
 	public ApprenantTableModel(List<Apprenant> apprenants) {
 		this.apprenants = apprenants;
@@ -68,6 +84,10 @@ public class ApprenantTableModel extends AbstractTableModel {
 				} else {
 					return ((Alternant) a).getNomEntreprise();
 				}
+			case ALERT_ABSENCE:
+				return verifAbsence(a);
+			case ALERT_RETARD:
+				return verifRetard(a);
 			}
 		}
 		return "";
@@ -78,5 +98,26 @@ public class ApprenantTableModel extends AbstractTableModel {
 			return apprenants.get(rowIndex);
 		}
 		return null;
+	}
+
+	// Méthode de vérification de retard
+	private String verifRetard(Apprenant a) {
+		if (this.delai > 30) {
+			return "ALERT";
+		} else {
+
+			return "OK";
+		}
+	}
+
+	// Méthode de vérification d'absence
+	private String verifAbsence(Apprenant a) {
+		if (a.getAbsence() > 0.1 * dureeTotal) {
+
+			return "ALERT";
+		} else {
+
+			return "OK";
+		}
 	}
 }
