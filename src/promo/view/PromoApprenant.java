@@ -78,7 +78,8 @@ public class PromoApprenant extends JPanel {
 		String S1[] = { "Stagiaire", "Alternant" };
 		comboboxLabel = new JLabel("Apprenant Type");
 		combobox = new JComboBox(S1);
-
+		combobox.setSelectedIndex(0);
+				
 		// All fields will be disabled until after the type of Apprenant is selected
 		nomLabel = new JLabel("Nom : ");
 		nomField = new JTextField("");
@@ -141,6 +142,7 @@ public class PromoApprenant extends JPanel {
 
 		SetUpLayout();
 		setupListeners();
+		setEnabled();
 	}
 
 	public PromoApprenant(PromoAppController promoController, Promotion promo, Apprenant apprenant) {
