@@ -200,7 +200,7 @@ public class PromoApprenant extends JPanel {
 		retardField.setBackground(Color.getHSBColor(0.1f, 0.75f, 1f));
 
 		absenceLabel = new JLabel("Absence : ");
-		absenceField = new JTextField(Integer.toString(apprenant.getRetard()));
+		absenceField = new JTextField(Integer.toString(apprenant.getAbsence()));
 		absenceLabel.setFont(new Font("Arial", Font.BOLD, 15));
 		absenceField.setBackground(Color.getHSBColor(0.1f, 0.75f, 1f));
 
