@@ -72,6 +72,7 @@ public class PromoApprenant extends JPanel {
 	public PromoApprenant(PromoAppController promoController, Promotion promo) {
 		this.promoController = promoController;
 		this.promo = promo;
+		this.setBackground(Color.getHSBColor(0.5f, 0.5f, 0.7f));
 
 		isNewApprenant = true;
 		String S1[] = { "Stagiaire", "Alternant" };
@@ -79,41 +80,64 @@ public class PromoApprenant extends JPanel {
 		combobox = new JComboBox(S1);
 
 		// All fields will be disabled until after the type of Apprenant is selected
-		nomLabel = new JLabel("Nom");
+		nomLabel = new JLabel("Nom : ");
 		nomField = new JTextField("");
+		nomLabel.setFont(new Font("Arial", Font.BOLD, 15));
+		nomField.setBackground(Color.getHSBColor(0.1f, 0.75f, 1f));
 
-		prenomLabel = new JLabel("Prénom");
+		prenomLabel = new JLabel("Prénom : ");
 		prenomField = new JTextField("");
+		prenomLabel.setFont(new Font("Arial", Font.BOLD, 15));
+		prenomField.setBackground(Color.getHSBColor(0.1f, 0.75f, 1f));
 
-		dateInscriptionLabel = new JLabel("Date d'inscription");
+		dateInscriptionLabel = new JLabel("Date d'inscription : ");
 		dateInscriptionField = new JTextField("");
+		dateInscriptionLabel.setFont(new Font("Arial", Font.BOLD, 15));
+		dateInscriptionField.setBackground(Color.getHSBColor(0.1f, 0.75f, 1f));
 
-		emailLabel = new JLabel("émail");
+		emailLabel = new JLabel("Email : ");
 		emailField = new JTextField("");
+		emailLabel.setFont(new Font("Arial", Font.BOLD, 15));
+		emailField.setBackground(Color.getHSBColor(0.1f, 0.75f, 1f));
+		
 
-		mobileLabel = new JLabel("mobile");
+		mobileLabel = new JLabel("Mobile : ");
 		mobileField = new JTextField("");
+		mobileLabel.setFont(new Font("Arial", Font.BOLD, 15));
+		mobileField.setBackground(Color.getHSBColor(0.1f, 0.75f, 1f));
 
-		retardLabel = new JLabel("retard");
+		retardLabel = new JLabel("Retard : ");
 		retardField = new JTextField("0");
+		retardLabel.setFont(new Font("Arial", Font.BOLD, 15));
+		retardField.setBackground(Color.getHSBColor(0.1f, 0.75f, 1f));
 
-		absenceLabel = new JLabel("absence");
+		absenceLabel = new JLabel("Absence : ");
 		absenceField = new JTextField("0");
+		absenceLabel.setFont(new Font("Arial", Font.BOLD, 15));
+		absenceField.setBackground(Color.getHSBColor(0.1f, 0.75f, 1f));
 
 		saveApprenant = new JButton("Save");
 		cancelApprenant = new JButton("Cancel");
 
-		nomEntrepriseLabel = new JLabel("Nom d'entreprise");
+		nomEntrepriseLabel = new JLabel("Nom d'entreprise : ");
 		nomEntrepriseField = new JTextField("");
+		nomEntrepriseLabel.setFont(new Font("Arial", Font.BOLD, 15));
+		nomEntrepriseField.setBackground(Color.getHSBColor(0.1f, 0.75f, 1f));
 
-		typeAllocationLabel = new JLabel("type d'allocation");
+		typeAllocationLabel = new JLabel("Type d'allocation : ");
 		typeAllocationField = new JTextField("");
-
-		montantAllocationStagiaireLabel = new JLabel("montant allocation");
+		typeAllocationLabel.setFont(new Font("Arial", Font.BOLD, 15));
+		typeAllocationField.setBackground(Color.getHSBColor(0.1f, 0.75f, 1f));
+		
+		montantAllocationStagiaireLabel = new JLabel("Allocation : ");
 		montantAllocationField = new JTextField("0");
+		montantAllocationStagiaireLabel.setFont(new Font("Arial", Font.BOLD, 15));
+		montantAllocationField.setBackground(Color.getHSBColor(0.1f, 0.75f, 1f));
 
-		montantSalaireApprenantLabel = new JLabel("salaire");
+		montantSalaireApprenantLabel = new JLabel("Salaire : ");
 		montantSalaireField = new JTextField("0");
+		montantSalaireApprenantLabel.setFont(new Font("Arial", Font.BOLD, 15));
+		montantSalaireField.setBackground(Color.getHSBColor(0.1f, 0.75f, 1f));
 
 		SetUpLayout();
 		setupListeners();
