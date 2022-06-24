@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -76,11 +77,8 @@ public class PromoDetail extends JPanel {
 	 * @param promoController
 	 */
 	public PromoDetail(PromoAppController promoController) {
-		System.out.println("PromoDetail new");
 
 		this.promoController = promoController;
-
-		this.setBackground(Color.GRAY);
 
 		namePromoLabel = new JLabel("Formations : ");
 		namePromoField = new JTextField("");
@@ -108,7 +106,7 @@ public class PromoDetail extends JPanel {
 		this.promoController = promoController;
 		this.promotion = promo;
 
-		this.setBackground(Color.getHSBColor(200, 100, 50));
+		
 
 		namePromoLabel = new JLabel("Formations : ");
 		namePromoField = new JTextField(promo.getNomPromotion());
@@ -131,7 +129,7 @@ public class PromoDetail extends JPanel {
 		tableModelAlternant = new ApprenantTableModel(promo.getApprenants());
 		alternantTable = new JTable(tableModelAlternant);
 		alternantTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		alternantTable.setBackground(Color.cyan);
+		alternantTable.setBackground(Color.getHSBColor(0.1f, 0.75f, 1f));
 
 		setupLayout();
 		setupListeners();
@@ -150,16 +148,19 @@ public class PromoDetail extends JPanel {
 	}
 
 	private void setupLayout() {
+		
+		
+		this.setBackground(Color.getHSBColor(0.5f, 0.5f, 0.7f));
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints gbL = new GridBagConstraints();
 		gbL.weightx = .2;
 		gbL.gridx = 0;
 		gbL.gridy = 0;
 		gbL.anchor = GridBagConstraints.LINE_END;
-		gbL.insets = new Insets(10, 10, 10, 10);
+		gbL.insets = new Insets(5, 5, 5, 5);
 
 		GridBagConstraints gbR = new GridBagConstraints();
-		gbR.weightx = .8;
+		gbR.weightx = 3;
 		gbR.gridx = 1;
 		gbR.gridy = 0;
 		gbR.gridwidth = 1;
@@ -192,38 +193,32 @@ public class PromoDetail extends JPanel {
 		gbL.gridx++;
 		this.add(cancelPromotion, gbR);
 
-//		gbL.gridx = 25;
-//		gbL.gridy++;
-//
-//		this.add(createAlternant, gbL);
-//		gbL.gridx = 30;
-//		this.add(updateAlternant, gbL);
-//		gbL.gridx = 35;
-//		this.add(deleteAlternant, gbL);
+		gbL.gridx = 0;
+		gbL.gridy++;
 
-		gbL.gridx = 25;
-		gbL.gridy = 1;
+		this.add(createAlternant, gbL);
+		gbL.gridx = 1;
+		this.add(updateAlternant, gbL);
+		gbL.gridx = 2;
+		this.add(deleteAlternant, gbL);
+
+		gbL.gridx = 0;
+		gbL.gridy = 6;
 		gbL.gridwidth = 10;
-		gbL.gridheight =4;
+		gbL.gridheight = 4;
 
-		gbR.gridy++;
 		gbL.gridwidth = 3;
 		gbL.fill = GridBagConstraints.BOTH;
 		gbL.weighty = 1;
+		gbL.gridy = 7;
+		gbR.gridy = 7;
 		this.add(new JScrollPane(alternantTable), gbL);
 
 		gbL.gridwidth = 1;
 		gbL.weighty = 0;
 		gbL.anchor = GridBagConstraints.LINE_END;
 		gbL.fill = GridBagConstraints.NONE;
-		gbL.gridx = 0;
-		gbL.gridy++;
-		gbR.gridy++;
-		this.add(createAlternant, gbL);
-		gbR.gridx = 1;
-		this.add(updateAlternant, gbR);
-		gbR.gridx++;
-		this.add(deleteAlternant, gbR);
+
 	}
 
 	private void setupListeners() {
