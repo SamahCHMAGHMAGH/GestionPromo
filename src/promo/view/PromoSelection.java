@@ -50,7 +50,7 @@ public class PromoSelection extends JPanel {
 	public PromoSelection(PromoAppController promoController, PromotionList promoList) {
 		System.out.println("PromoSelection");
 		System.out.println(promoList);
-		this.setBackground(Color.cyan);
+		this.setBackground(Color.getHSBColor(0.5f, 0.6f, 0.6f));
 		this.promoController = promoController;
 		this.promoList = promoList;
 
@@ -69,7 +69,7 @@ public class PromoSelection extends JPanel {
 
 		tableModel = new PromoTableModel(promoList.getPromoList());
 		promoJTable = new JTable(tableModel);
-		promoJTable.setBackground(Color.getHSBColor(200, 100, 50));
+		promoJTable.setBackground(Color.getHSBColor(0.1f, 0.75f, 1f));
 
 		backupPromoList = new JButton("Backup Database");
 		restorePromoList = new JButton("Restore Database");
