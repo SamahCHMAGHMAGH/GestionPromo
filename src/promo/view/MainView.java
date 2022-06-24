@@ -9,9 +9,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import promo.controller.PromoAppController;
+import promo.model.Alternant;
 import promo.model.Apprenant;
 import promo.model.Promotion;
 import promo.model.PromotionList;
+import promo.model.Stagiaire;
 
 public class MainView extends JFrame {
 	private PromoApprenant promoApprenant;
@@ -125,5 +127,12 @@ public class MainView extends JFrame {
 		this.setContentPane(component);
 		this.revalidate(); // revalidate all the frame components
 		this.repaint(); // and repaint the frame
+	}
+
+	public void saveApprenantClicked(Promotion promo, Apprenant apprenant, boolean isNewApprenant) {
+		if (isNewApprenant) {
+			promo.getApprenants().add(apprenant);
+		}
+		updatePromotionClicked(promo);
 	}
 }

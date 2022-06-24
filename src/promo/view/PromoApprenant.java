@@ -61,6 +61,7 @@ public class PromoApprenant extends JPanel {
 	private PromoAppController promoController;
 	private Promotion promo;
 	private Apprenant apprenant;
+	private boolean isNewApprenant = false;
 
 	/**
 	 * Constructor for a new apprenant, will as to select the Apprentant type via a
@@ -72,6 +73,7 @@ public class PromoApprenant extends JPanel {
 		this.promoController = promoController;
 		this.promo = promo;
 
+		isNewApprenant = true;
 		String S1[] = { "Stagiaire", "Alternant" };
 		comboboxLabel = new JLabel("Apprenant Type");
 		combobox = new JComboBox(S1);
@@ -230,30 +232,9 @@ public class PromoApprenant extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (combobox.getSelectedItem().toString() == "Stagiaire") {
-					stagiaire.setTypeAllocation(typeAllocationField.getText());
-					stagiaire.setMontantAllocation(Double.parseDouble(montantAllocationField.getText()));
-					promoController.saveApprenantClicked(promo, stagiaire);
-				} else {
-					alternant.setSalaire(Double.parseDouble(montantSalaireField.getText()));
-					alternant.setNomEntreprise(nomEntrepriseField.getText());
-					promoController.saveApprenantClicked(promo, alternant);
-				}
-				apprenant.setNom(nomField.getText());
-				apprenant.setEmail(emailField.getText());
-//TODO Fill in all the other fields
-				promoController.saveApprenantClicked(promo, apprenant);
-			}
-		});
-
-		combobox.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// apprenant is null when we are creating a new apprenant
-				// so create an instance of the sub class object then cast
-				// to apprenant;
-				if (apprenant == null) {
+				if (isNewApprenant) {
+					// when we are creating a new apprenant we need to create
+					// an instance of the sub class object then cast to apprenant;
 					if (combobox.getSelectedItem().toString() == "Stagiaire") {
 						stagiaire = new Stagiaire();
 					} else {
@@ -261,6 +242,24 @@ public class PromoApprenant extends JPanel {
 					}
 					apprenant = (Apprenant) alternant;
 				}
+				if (combobox.getSelectedItem().toString() == "Stagiaire") {
+					stagiaire.setTypeAllocation(typeAllocationField.getText());
+					stagiaire.setMontantAllocation(Double.parseDouble(montantAllocationField.getText()));
+				} else {
+					alternant.setSalaire(Double.parseDouble(montantSalaireField.getText()));
+					alternant.setNomEntreprise(nomEntrepriseField.getText());
+				}
+				apprenant.setNom(nomField.getText());
+				apprenant.setEmail(emailField.getText());
+//TODO Fill in all the other fields
+				promoController.saveApprenantClicked(promo, apprenant, isNewApprenant);
+			}
+		});
+
+		combobox.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
 				setEnabled();
 			}
 		});
@@ -277,7 +276,7 @@ public class PromoApprenant extends JPanel {
 			nomEntrepriseField.setEnabled(true);
 			montantSalaireField.setEnabled(true);
 
-			typeAllocationField.setEnabled(true);
+			typeAllocationField.setEnabled(false);
 			montantAllocationField.setEnabled(false);
 		}
 	}

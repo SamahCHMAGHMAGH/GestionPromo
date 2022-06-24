@@ -7,6 +7,9 @@ public class Alternant extends Apprenant {
 	protected String nomEntreprise;
 	protected double salaire;
 
+	public Alternant() {
+	}
+
 	public Alternant(String nom, String prénom, LocalDate dateInscription, String email, String mobile,
 			String nomEntreprise, double salaire) {
 		super(nom, prénom, dateInscription, email, mobile);

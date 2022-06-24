@@ -12,6 +12,9 @@ public abstract class Apprenant {
 	private int retard;
 	private int absence;
 
+	public Apprenant() {
+	}
+
 	public Apprenant(String nom, String prenom, LocalDate dateInscription, String email, String mobile) {
 
 		this.nom = nom;
@@ -22,6 +25,7 @@ public abstract class Apprenant {
 		this.retard = 0;
 		this.absence = 0;
 	}
+
 
 	public String getNom() {
 		return nom;
