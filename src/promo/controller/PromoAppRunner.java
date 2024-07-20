@@ -3,6 +3,7 @@ package promo.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+//c'est une classe main pour le démarrage dont on a crée la variable promoAppController
 public class PromoAppRunner {
 
 	/**

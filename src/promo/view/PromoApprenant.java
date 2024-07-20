@@ -8,10 +8,13 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ContainerListener;
 import java.time.LocalDate;
 
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -22,13 +25,15 @@ import promo.model.Apprenant;
 import promo.model.Promotion;
 import promo.model.Stagiaire;
 
+//dans cette classe on a défini l'affichage du troisième onglet de l'application qui contient la liste des apprenants
+//mettre les composants graphiques appropriés aux éléments et les configurer en utilisant Listeners 
+//faire appel à le composant de base ou le conteneur JPanel
 public class PromoApprenant extends JPanel {
 
-	// on a défini les attributs par la classe "JLabel" qui permet d'afficher une
-	// chaîne courte
-	// et par la classe "JTextField" qui permet de modifier une seule ligne de texte
-	// on a rajouté a la fin deux attributs de type classe pour sauvgarder et
-	// annuler
+	private static final ContainerListener containerListener = null;
+	protected static final AbstractButton Jbutton = null;
+	
+	//définir le composant graphique approprié pour chaque élément de l'apprenant 
 	private JLabel nomLabel;
 	private JLabel prenomLabel;
 	private JLabel dateInscriptionLabel;
@@ -69,6 +74,8 @@ public class PromoApprenant extends JPanel {
 	 * 
 	 * @param promoController
 	 */
+	//faire appel à setUpLayout, setUpListeners et setEnabled pour tous les éléments 
+	//qui concernent un apprenant
 	public PromoApprenant(PromoAppController promoController, Promotion promo) {
 		this.promoController = promoController;
 		this.promo = promo;
@@ -139,12 +146,13 @@ public class PromoApprenant extends JPanel {
 		montantSalaireField = new JTextField("0");
 		montantSalaireApprenantLabel.setFont(new Font("Arial", Font.BOLD, 15));
 		montantSalaireField.setBackground(Color.getHSBColor(0.1f, 0.75f, 1f));
-
+		
+		 
 		SetUpLayout();
 		setupListeners();
 		setEnabled();
 	}
-
+	//une méthode pour définir tous les détails de la liste d'un apprenant
 	public PromoApprenant(PromoAppController promoController, Promotion promo, Apprenant apprenant) {
 		System.out.println("PromoApprenant");
 		System.out.println(apprenant);
@@ -154,6 +162,7 @@ public class PromoApprenant extends JPanel {
 		this.promo = promo;
 		this.apprenant = apprenant;
 
+		//le composant combobox (un menu déroulant) pour selectionner le type d'apprenant 
 		String S1[] = { "Stagiaire", "Alternant" };
 		comboboxLabel = new JLabel("Type d'apprenants : ");
 		comboboxLabel.setFont(new Font("Arial", Font.BOLD, 15));
@@ -161,6 +170,7 @@ public class PromoApprenant extends JPanel {
 		combobox.setBackground(Color.LIGHT_GRAY);
 		combobox.setEnabled(false);
 
+		//dans le cas où on selectionne alternant, on bloque stagiaire
 		if (apprenant instanceof Stagiaire) {
 			stagiaire = (Stagiaire) apprenant;
 			combobox.setSelectedIndex(0);
@@ -168,7 +178,7 @@ public class PromoApprenant extends JPanel {
 			alternant = (Alternant) apprenant;
 			combobox.setSelectedIndex(1);
 		}
-
+		//définir la liste de l'alternant
 		nomLabel = new JLabel("Nom : ");
 		nomField = new JTextField(apprenant.getNom());
 		nomLabel.setFont(new Font("Arial", Font.BOLD, 15));
@@ -206,7 +216,7 @@ public class PromoApprenant extends JPanel {
 
 		saveApprenant = new JButton("Save");
 		cancelApprenant = new JButton("Cancel");
-
+		//si l'apprenant est stagiaire
 		if (apprenant instanceof Stagiaire) {
 			nomEntrepriseLabel = new JLabel("Entreprise : ");
 			nomEntrepriseField = new JTextField("N/A");
@@ -228,6 +238,7 @@ public class PromoApprenant extends JPanel {
 			montantSalaireField.setBackground(Color.getHSBColor(0.1f, 0.75f, 1f));
 
 		}
+		//si l'apprenant est alternant
 		if (apprenant instanceof Alternant) {
 			nomEntrepriseLabel = new JLabel("Entreprise : ");
 			nomEntrepriseField = new JTextField(((Alternant) apprenant).getNomEntreprise());
@@ -254,10 +265,11 @@ public class PromoApprenant extends JPanel {
 		SetUpLayout();
 		setupListeners();
 	}
-
+	//l'écouteur d'action est averti chaque fois qu'on clique sur le bouton ou l'élément de menu
 	private void setupListeners() {
 		cancelApprenant.addActionListener(new ActionListener() {
-
+			
+			//écouteur d'action pour effectuer cancelApprenant
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				promoController.cancelApprenantClicked(promo);
@@ -265,7 +277,9 @@ public class PromoApprenant extends JPanel {
 		});
 
 		saveApprenant.addActionListener(new ActionListener() {
-
+			 
+			//action effectuée pour un nouveau apprenant(ActionEvent), cet évènement est déclanché dès
+			//qu'on clique sur un bouton
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (isNewApprenant) {
@@ -295,6 +309,8 @@ public class PromoApprenant extends JPanel {
 
 
 				promoController.saveApprenantClicked(promo, apprenant, isNewApprenant);
+				
+				
 			}
 		});
 
@@ -305,8 +321,12 @@ public class PromoApprenant extends JPanel {
 				setEnabled();
 			}
 		});
+	
 	}
-
+	
+	//si on selectionne "Stagiaire" boquer les champs de nomEtreprises et montantSalaire
+	//activer les champs de typeAllocation et montantAllocation 
+	//sinon on inverse au cas où on selectionne "alternant"
 	public void setEnabled() {
 		if (combobox.getSelectedItem().toString() == "Stagiaire") {
 			nomEntrepriseField.setEnabled(false);
@@ -322,7 +342,8 @@ public class PromoApprenant extends JPanel {
 			montantAllocationField.setEnabled(false);
 		}
 	}
-
+	
+	//utilisation de GridLayout pour organiser et positionner tous les éléments apprenant dans une grille rectangulaire. 
 	private void SetUpLayout() {
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints gbL = new GridBagConstraints();

@@ -8,6 +8,7 @@ import promo.model.Alternant;
 import promo.model.Apprenant;
 import promo.model.Stagiaire;
 
+//on a défini la table  de l'apprenant avec ses colonnes, ses lignes et ses valeurs 
 public class ApprenantTableModel extends AbstractTableModel {
 
 	List<Apprenant> apprenants;
@@ -23,7 +24,7 @@ public class ApprenantTableModel extends AbstractTableModel {
 	public void setDelai(int delai) {
 		this.delai = delai;
 	}
-
+	
 	private static final int NOMAPPRENANT = 0;
 
 	private static final int PRENOMAPPRENANT = 1;
@@ -121,3 +122,4 @@ public class ApprenantTableModel extends AbstractTableModel {
 		}
 	}
 }
+

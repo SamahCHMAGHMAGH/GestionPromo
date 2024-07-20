@@ -3,6 +3,8 @@ package promo.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+//c'est une classe fille qui va hériter tous les attributs de la classe parent "apprenant" en ajoutant des autres 
+//qui correspondent à un alternant(nom d'entreprise et salaire)
 public class Alternant extends Apprenant {
 
 	protected String nomEntreprise;
@@ -17,7 +19,8 @@ public class Alternant extends Apprenant {
 		this.nomEntreprise = nomEntreprise;
 		this.salaire = salaire;
 	}
-
+	
+	//getters et setters
 	public String getNomEntreprise() {
 		return nomEntreprise;
 	}

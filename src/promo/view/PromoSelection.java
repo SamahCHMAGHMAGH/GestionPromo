@@ -28,7 +28,12 @@ import promo.controller.PromoAppController;
 import promo.model.Promotion;
 import promo.model.PromotionList;
 
+//dans cette classe on a défini l'affichage du premier onglet de l'application qui contient la liste de promotion
+//mettre les composants graphiques appropriés aux éléments et les configurer en utilisant Listeners 
+//faire appel à le composant de base ou le conteneur JPanel
 public class PromoSelection extends JPanel {
+	
+	//définir le composant graphique approprié pour chaque élément 
 	private JTextField nameField;
 	private JLabel nameLabel;
 
@@ -45,6 +50,7 @@ public class PromoSelection extends JPanel {
 	private PromotionList promoList;
 	private Promotion selectedPromotion;
 
+	//getters et setters pour récupérer la promotion selectionnée
 	public Promotion getSelectedPromotion() {
 		return selectedPromotion;
 	}
@@ -81,7 +87,7 @@ public class PromoSelection extends JPanel {
 		setupLayout();
 		setupListeners();
 	}
-
+	//faire appel à Layout pour positionner les éléments à l'intérieur d'un conteneur en utilisant Grid
 	private void setupLayout() {
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints gbL = new GridBagConstraints();
@@ -132,16 +138,17 @@ public class PromoSelection extends JPanel {
 		this.add(backupPromoList, gbL);
 
 	}
-
+	// configurer les boutons des éléménts pour avoir des différentes actions, en utilisant event listener
 	private void setupListeners() {
 		updateName.addActionListener(new ActionListener() {
-
+			//méthode pour effectuée l'action
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				promoController.updateNameClicked(nameField.getText());
 
 			}
 		});
+		
 		createPromotion.addActionListener(new ActionListener() {
 
 			@Override
@@ -175,7 +182,7 @@ public class PromoSelection extends JPanel {
 		});
 
 		promoJTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-
+			//une méthode pour configurer et activer le bouton delete et save pour la promotion choisie 
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				if (!e.getValueIsAdjusting()) {

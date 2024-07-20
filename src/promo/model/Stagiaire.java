@@ -2,6 +2,8 @@ package promo.model;
 
 import java.time.LocalDate;
 
+//c'est une classe fille qui va hériter tous les attributs de la classe parent "apprenant" en ajoutant des autres 
+//qui correspondent à un stagiaire(type et montant d'allocation)
 public class Stagiaire extends Apprenant {
 
 	protected String typeAllocation;
@@ -15,7 +17,7 @@ public class Stagiaire extends Apprenant {
 		this.typeAllocation = typeAllocation;
 		this.montantAllocation = montantAllocation;
 	}
-
+	//getters et setters
 	public String getTypeAllocation() {
 		return typeAllocation;
 	}

@@ -8,10 +8,15 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Promotion implements Serializable {
+//on va créer les attributs de la promotion (nomPromotion, dateDebutPromotion, dureeTotale, listApprenant) 
+//des méthodes pour gérer(joursPasses, listeDetails, tempsRetard, jourAbsence)
 
+public class Promotion implements Serializable {
+	
+	//définir le nom de la promotion, le délai et l'absence et les mettre par la suite dans une liste
 	protected String nomPromotion;
 
+	//getters et setters 
 	public int getDelai() {
 		return delai;
 	}
@@ -42,25 +47,28 @@ public class Promotion implements Serializable {
 
 	protected LocalDate dateDebutPromotion;
 
+	//méthode pour la date de début de promotion avec retour
 	public LocalDate getDateDebutPromotion() {
 		return dateDebutPromotion;
 	}
 
 	protected int dureeTotal;
-
+	//méthode pour la durée total de la formation avec retour
 	public int getDureeTotal() {
 		return dureeTotal;
 	}
 
 	protected List<Apprenant> apprenants;
-
+	
+	//méthode pour récupérer la liste des apprenants
 	public List<Apprenant> getApprenants() {
 		return apprenants;
 	}
-
+	
 	protected int delai;
 	protected int absence;
 
+	//méthode pour la durée de la formation et l'absence
 	public Promotion(String nomPromotion, LocalDate dateDebutPromotion, int dureeTotal, List<Apprenant> apprenants) {
 		super();
 		this.nomPromotion = nomPromotion;

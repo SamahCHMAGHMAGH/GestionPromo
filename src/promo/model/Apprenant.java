@@ -3,6 +3,8 @@ package promo.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+//c'est classe parent qui est abstraite, elle n'est pas instanciable, elle va servir les autres classes héritées(stagiaire et alternant)  
+//on a crée tous les attributs que le centre de formation utilise pour chaque apprenant 
 public abstract class Apprenant implements Serializable {
 
 	private String nom;
@@ -26,7 +28,7 @@ public abstract class Apprenant implements Serializable {
 		this.retard = 0;
 		this.absence = 0;
 	}
-
+	//getters et setters
 	public String getNom() {
 		return nom;
 	}

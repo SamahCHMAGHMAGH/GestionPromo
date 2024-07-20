@@ -7,6 +7,7 @@ import javax.swing.table.AbstractTableModel;
 
 import promo.model.Promotion;
 
+//on a défini la table  de la promotion avec ses colonnes, ses lignes et ses valeurs 
 public class PromoTableModel extends AbstractTableModel {
 	List<Promotion> promotions;
 
@@ -43,7 +44,7 @@ public class PromoTableModel extends AbstractTableModel {
 	public Class<?> getColumnClass(int columnIndex) {
 		return clazz[columnIndex];
 	}
-
+	
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		Promotion a = getPromotion(rowIndex);

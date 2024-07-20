@@ -30,8 +30,12 @@ import promo.controller.PromoAppController;
 import promo.model.Apprenant;
 import promo.model.Promotion;
 
+//dans cette classe on a défini l'affichage du deuxième onglet de l'application qui contient les détails de la promotion
+//mettre les composants graphiques appropriés aux éléments et les configurer en utilisant Listeners 
+//faire appel à le composant de base ou le conteneur JPanel
 public class PromoDetail extends JPanel {
-
+	
+	//définir le composant graphique approprié pour chaque élément 
 	private JTextField namePromoField;
 	private JLabel namePromoLabel;
 
@@ -56,6 +60,7 @@ public class PromoDetail extends JPanel {
 
 	private Apprenant selectedApprenant;
 
+	//getters et setters pour récupérer l'apprenant sélectonné
 	public Apprenant getSelectedApprenant() {
 		return selectedApprenant;
 	}
@@ -63,9 +68,9 @@ public class PromoDetail extends JPanel {
 	public void setSelectedApprenant(Apprenant selectedApprenant) {
 		this.selectedApprenant = selectedApprenant;
 	}
-
+	
 	private Promotion promotion;
-
+	//méthode pour récupérer la promotion
 	public Promotion getPromotion() {
 		return promotion;
 	}
@@ -76,6 +81,8 @@ public class PromoDetail extends JPanel {
 	 * 
 	 * @param promoController
 	 */
+	//détail de la formation 
+	//définir les composants graphiques appropriés aux éléments
 	public PromoDetail(PromoAppController promoController) {
 		this.promoController = promoController;
 		this.isNewPromotion = true;
@@ -99,7 +106,8 @@ public class PromoDetail extends JPanel {
 		setupLayout();
 		setupListeners();
 	}
-
+	//une méthode pour gérer l'affichage des éléments 
+	//faire appel à setUpButtons, setupLayout, setUpListeners et setUpTableListeners
 	public PromoDetail(PromoAppController promoController, Promotion promo) {
 		System.out.println("PromoDetail");
 		System.out.println(promo);
@@ -123,7 +131,7 @@ public class PromoDetail extends JPanel {
 		dureeTotalLabel.setFont(new Font("Arial", Font.BOLD, 15));
 
 		setupButtons();
-
+		//table de nouveau alternant
 		tableModelAlternant = new ApprenantTableModel(promo.getApprenants());
 		tableModelAlternant.setDelai(promo.getDelai());
 		tableModelAlternant.setDureeTotal(promo.getDureeTotal());
@@ -136,7 +144,7 @@ public class PromoDetail extends JPanel {
 		setupListeners();
 		setupTableListeners();
 	}
-
+	//méthode pour gérer l'installation des boutons pour le deuxième onglet de l'application  
 	private void setupButtons() {
 		updatePromotion = new JButton("Update Promotion");
 		cancelPromotion = new JButton("Back to Promotion List");
@@ -147,7 +155,8 @@ public class PromoDetail extends JPanel {
 		deleteAlternant = new JButton("Delete");
 		deleteAlternant.setEnabled(false);
 	}
-
+	//méthode pour la mise en plan et la mise en page avec le logiciel Layout 
+	//positionner les objets dans des grilles bien définies avec Grid
 	private void setupLayout() {
 
 		this.setBackground(Color.getHSBColor(0.5f, 0.5f, 0.7f));
@@ -218,10 +227,13 @@ public class PromoDetail extends JPanel {
 		gbL.gridx++;
 		this.add(deleteAlternant, gbL);
 	}
-
+	//méthode setUpListerners, c'est l'écouteur d'action Java, il sera averti chaque fois qu'on 
+	//clique sur le bouton ou l'élément de menu.
 	private void setupListeners() {
 		updatePromotion.addActionListener(new ActionListener() {
 
+			//une méthode qui est associée à actionListeners, 
+			//sur lequel le click a été effectué pour nomPromotion, dureeTotal et updatePromotion
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (isNewPromotion) {
@@ -234,7 +246,7 @@ public class PromoDetail extends JPanel {
 			}
 		});
 		cancelPromotion.addActionListener(new ActionListener() {
-
+			//action effectuée pour cancelPromotion
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				promoController.cancelPromotionClicked();
@@ -242,7 +254,7 @@ public class PromoDetail extends JPanel {
 		});
 
 		createAlternant.addActionListener(new ActionListener() {
-
+			//action effectuée pour newApprenant
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				promoController.newApprenantClicked();
@@ -250,7 +262,7 @@ public class PromoDetail extends JPanel {
 		});
 
 		updateAlternant.addActionListener(new ActionListener() {
-
+			//action effectuée pour updateApprenant
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				promoController.updateApprenantClicked(selectedApprenant);
@@ -266,7 +278,7 @@ public class PromoDetail extends JPanel {
 			}
 		});
 	}
-
+	//on a fait appel à la méthode Listeners pour la table de l'alternant  
 	private void setupTableListeners() {
 
 		alternantTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -287,7 +299,7 @@ public class PromoDetail extends JPanel {
 		});
 
 	}
-
+	//méthode pour enregistrer le NomPromotion et la DateDebutPromotion
 	public void save() {
 		promotion.setNomPromotion(namePromoField.getText());
 		promotion.setDateDebutPromotion(LocalDate.now());

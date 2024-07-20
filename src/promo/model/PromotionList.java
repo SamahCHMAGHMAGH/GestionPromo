@@ -3,6 +3,7 @@ package promo.model;
 import java.io.Serializable;
 import java.util.List;
 
+//méthode pour gérer le nom du centre et la liste de promotion
 public class PromotionList implements Serializable {
 	private String name;
 	private List<Promotion> promoList;
@@ -11,7 +12,7 @@ public class PromotionList implements Serializable {
 		this.setPromoList(promoList);
 		this.name = name;
 	}
-
+	//méthode avec retour pour la liste de promotion
 	public List<Promotion> getPromoList() {
 		return promoList;
 	}
@@ -29,7 +30,7 @@ public class PromotionList implements Serializable {
 		s += "\n]";
 		return s;
 	}
-
+	//récupérer le nom du centre
 	public String getName() {
 		return name;
 	}
